@@ -3,5 +3,15 @@
   background-size: contain;
   background-repeat: no-repeat;
   width: 95vw;
-  height: 1051px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 400px;
+}
+#notes {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid red;
+  width: 100%;
 }
