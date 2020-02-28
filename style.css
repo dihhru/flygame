@@ -1,3 +1,7 @@
 .bg {
-  border: 1px solid red;
+  background-image: url(images/pannels/bach_pannel.png); /* Путь к фоновому изображению */
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 95vw;
+  height: 1051px;
 }
