@@ -68,6 +68,24 @@ class Game {
   constructor() {
     this.level = 0;
   }
+  detectCollision(plane, gameObject) {
+    let bottomOfplane = plane.position.y + plane.size;
+    let topOfplane = plane.position.y;
+    let topOfObject = gameObject.position.y;
+    let leftSideOfObject = gameObject.position.x;
+    let rightSideOfObject = gameObject.position.x + gameObject.width;
+    let bottomOfObject = gameObject.position.y + gameObject.height;
+    if (
+      bottomOfplane >= topOfObject &&
+      topOfplane <= bottomOfObject &&
+      plane.position.x >= leftSideOfObject &&
+      plane.position.x + plane.size <= rightSideOfObject
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  }
   drawNotes() {
     let notes = sounds[this.level]; //slice or something
     notes.map(function(note, index) {
@@ -79,5 +97,27 @@ class Game {
     });
   }
 }
+class Plane {
+  constructor(speed) {
+    this.image = "images/plane.png";
+    this.speed = speed;
+    this.position = { x: 10, y: 400 };
+    this.size = 10;
+  }
+  draw() {
+    let canvas = document.getElementById("bg");
+    let ctx = canvas.getContext("2d");
+    ctx.drawImage(
+      this.image,
+      this.position.x,
+      this.position.y,
+      this.size,
+      this.size
+    );
+  }
+}
 let game = new Game();
+let plane = new Plane("t");
+plane.draw();
+console.log(plane);
 game.drawNotes();
