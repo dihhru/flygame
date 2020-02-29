@@ -104,11 +104,11 @@ class Plane {
     this.position = { x: 10, y: 150 };
     this.size = 1;
   }
-  moveUp() {
-    this.position.y++;
+  moveDown() {
+    this.position.y = this.position.y + 15;
   }
   moveUp() {
-    this.position.y--;
+    this.position.y = this.position.y - 15;
   }
   update() {
     this.position.x += this.speed;
@@ -125,17 +125,16 @@ class InputHandler {
   constructor(plane, game) {
     document.addEventListener("keydown", event => {
       switch (event.keyCode) {
-        case 37:
-          plane.moveDown();
+        case 38:
+          plane.moveUp();
           break;
 
-        case 39:
-          plane.moveUp();
+        case 40:
+          plane.moveDown();
           break;
         // case 27:
         //    game.togglePause();
         //  break;
-
         //  case 32:
         //   game.start();
         //  break;
@@ -156,7 +155,8 @@ function gameLoop(timestamp) {
   }, 15);
 }
 requestAnimationFrame(gameLoop);
-let plane = new Plane(3);
+let plane = new Plane(1);
+let input = new InputHandler(plane);
 plane.draw();
 setTimeout(function() {
   plane.draw();
