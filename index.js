@@ -101,7 +101,7 @@ class Plane {
   constructor(speed) {
     this.image = "images/plane.png";
     this.speed = speed;
-    this.position = { x: 10, y: 400 };
+    this.position = { x: 10, y: 150 };
     this.size = 1;
   }
   moveUp() {
@@ -157,8 +157,6 @@ function gameLoop(timestamp) {
 }
 requestAnimationFrame(gameLoop);
 let plane = new Plane(3);
-let input = new InputHandler(plane);
-console.log(input);
 plane.draw();
 setTimeout(function() {
   plane.draw();
