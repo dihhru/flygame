@@ -102,22 +102,64 @@ class Plane {
     this.image = "images/plane.png";
     this.speed = speed;
     this.position = { x: 10, y: 400 };
-    this.size = 10;
+    this.size = 1;
+  }
+  moveUp() {
+    this.position.y++;
+  }
+  moveUp() {
+    this.position.y--;
+  }
+  update() {
+    this.position.x += this.speed;
   }
   draw() {
-    let canvas = document.getElementById("bg");
-    let ctx = canvas.getContext("2d");
-    ctx.drawImage(
-      this.image,
-      this.position.x,
-      this.position.y,
-      this.size,
-      this.size
-    );
+    var canvas = document.getElementById("bg");
+    var ctx = canvas.getContext("2d");
+    var image = document.getElementById("plane");
+    ctx.clearRect(0, 0, 1200, 400);
+    ctx.drawImage(image, this.position.x, this.position.y, 100, 100);
   }
 }
+class InputHandler {
+  constructor(plane, game) {
+    document.addEventListener("keydown", event => {
+      switch (event.keyCode) {
+        case 37:
+          plane.moveDown();
+          break;
+
+        case 39:
+          plane.moveUp();
+          break;
+        // case 27:
+        //    game.togglePause();
+        //  break;
+
+        //  case 32:
+        //   game.start();
+        //  break;
+      }
+    });
+  }
+}
+
 let game = new Game();
-let plane = new Plane("t");
+let lastTime = 0;
+function gameLoop(timestamp) {
+  setTimeout(function() {
+    let deltaTime = timestamp - lastTime;
+    lastTime = timestamp;
+    plane.update(deltaTime);
+    plane.draw();
+    requestAnimationFrame(gameLoop);
+  }, 15);
+}
+requestAnimationFrame(gameLoop);
+let plane = new Plane(3);
+let input = new InputHandler(plane);
+console.log(input);
 plane.draw();
-console.log(plane);
-game.drawNotes();
+setTimeout(function() {
+  plane.draw();
+}, 100);
