@@ -86,19 +86,20 @@ let notesPositions = [
 class Game {
   constructor() {
     this.level = 0;
+    this.activeNote = null;
   }
   detectCollision(plane, note) {
     let bottomOfplane = plane.position.y + plane.size;
     let topOfplane = plane.position.y;
     let topOfObject = note[1];
-    let bottomOfObject = note[1] + 50;
+    let bottomOfObject = note[1] + 150;
     let leftSideOfObject = note[0];
-    let rightSideOfObject = note[0] + 50;
+    let rightSideOfObject = note[0] + 150;
     if (
       bottomOfplane >= topOfObject &&
       topOfplane <= bottomOfObject &&
       plane.position.x >= leftSideOfObject &&
-      plane.position.x + plane.size <= rightSideOfObject
+      plane.position.x <= rightSideOfObject
     ) {
       return true;
     } else {
@@ -111,7 +112,7 @@ class Game {
     let noteImg = document.getElementById("note");
     ctx.drawImage(note, 150, 200, 100, 100);
     ctx.clearRect(0, 0, 1200, 400);
-    notesPositions.map(function(note, index) {
+    notesPositions.map(function(note) {
       ctx.drawImage(noteImg, note[0], note[1], 50, 50);
     });
   }
@@ -142,7 +143,16 @@ class Plane {
     ctx.clearRect(0, 0, 1200, 400);
     game.drawNotes();
     ctx.drawImage(image, this.position.x, this.position.y, 100, 100);
-    game.detectCollision(plane);
+    notesPositions.forEach((note, index) => {
+      if (game.activeNote !== index) {
+        let n = game.detectCollision(plane, note);
+        if (n) {
+          game.activeNote = index;
+          console.log(true);
+          console.log(index);
+        }
+      }
+    });
     let range = document.getElementById("range").value;
     this.distance = 0.05 * range;
     cords.innerHTML =
