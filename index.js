@@ -1,22 +1,22 @@
 const sounds = [
   [
-    "E2",
-    "D2#",
-    "E2",
-    "D2#",
-    "E2",
-    "B2",
-    "D2",
-    "C2",
-    "A2",
-    "C1",
-    "E1",
-    "A2",
-    "B2",
-    "E1",
-    "C2",
-    "B2",
-    "A2"
+    "e2",
+    "d2#",
+    "e2",
+    "d2#",
+    "e2",
+    "b2",
+    "d2",
+    "c2",
+    "a2",
+    "c1",
+    "e1",
+    "a2",
+    "b2",
+    "e1",
+    "c2",
+    "b2",
+    "a2"
   ], //Beethoven
   [
     "C1",
@@ -92,14 +92,14 @@ class Game {
     let bottomOfplane = plane.position.y + plane.size;
     let topOfplane = plane.position.y;
     let topOfObject = note[1];
-    let bottomOfObject = note[1] + 150;
+    let bottomOfObject = note[1] + 110;
     let leftSideOfObject = note[0];
-    let rightSideOfObject = note[0] + 150;
+    let rightSideOfObject = note[0] + 110;
     if (
       bottomOfplane >= topOfObject &&
       topOfplane <= bottomOfObject &&
       plane.position.x >= leftSideOfObject &&
-      plane.position.x <= rightSideOfObject
+      plane.position.x + 100 <= rightSideOfObject
     ) {
       return true;
     } else {
@@ -144,12 +144,16 @@ class Plane {
     game.drawNotes();
     ctx.drawImage(image, this.position.x, this.position.y, 100, 100);
     notesPositions.forEach((note, index) => {
-      if (game.activeNote !== index) {
+      if (game.activeNote !== index && index > game.activeNote) {
         let n = game.detectCollision(plane, note);
         if (n) {
           game.activeNote = index;
-          console.log(true);
-          console.log(index);
+          let soundId = sounds[0][index];
+          let src = `sounds/${soundId}.wav`;
+          let audio = document.createElement("audio");
+          audio.src = src;
+          console.log(src);
+          audio.play();
         }
       }
     });
