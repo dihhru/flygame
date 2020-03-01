@@ -1,9 +1,9 @@
 const sounds = [
   [
     "e2",
-    "d2#",
+    "d2t",
     "e2",
-    "d2#",
+    "d2t",
     "e2",
     "b2",
     "d2",
@@ -86,7 +86,7 @@ let notesPositions = [
 class Game {
   constructor() {
     this.level = 0;
-    this.activeNote = null;
+    this.activeNote = -1;
   }
   detectCollision(plane, note) {
     let bottomOfplane = plane.position.y + plane.size;
@@ -98,8 +98,7 @@ class Game {
     if (
       bottomOfplane >= topOfObject &&
       topOfplane <= bottomOfObject &&
-      plane.position.x >= leftSideOfObject &&
-      plane.position.x + 100 <= rightSideOfObject
+      plane.position.x + 50 >= leftSideOfObject
     ) {
       return true;
     } else {
@@ -151,8 +150,8 @@ class Plane {
           let soundId = sounds[0][index];
           let src = `sounds/${soundId}.wav`;
           let audio = document.createElement("audio");
+          audio.id = index;
           audio.src = src;
-          console.log(src);
           audio.play();
         }
       }
