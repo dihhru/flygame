@@ -103,6 +103,7 @@ class Plane {
     this.speed = speed;
     this.position = { x: 10, y: 150 };
     this.size = 1;
+    this.distance = 0;
   }
   moveDown() {
     this.position.y = this.position.y + 15;
@@ -111,14 +112,24 @@ class Plane {
     this.position.y = this.position.y - 15;
   }
   update() {
-    this.position.x += this.speed;
+    this.position.x += this.distance;
   }
   draw() {
     var canvas = document.getElementById("bg");
     var ctx = canvas.getContext("2d");
     var image = document.getElementById("plane");
+    let cords = document.getElementById("cords");
     ctx.clearRect(0, 0, 1200, 400);
     ctx.drawImage(image, this.position.x, this.position.y, 100, 100);
+    let range = document.getElementById("range").value;
+    this.distance = 0.1 * range;
+    cords.innerHTML =
+      "x:" +
+      Math.ceil(this.position.x) +
+      "y:" +
+      Math.ceil(this.position.y) +
+      "range:" +
+      range;
   }
 }
 class InputHandler {
@@ -160,4 +171,4 @@ let input = new InputHandler(plane);
 plane.draw();
 setTimeout(function() {
   plane.draw();
-}, 100);
+}, 900);
