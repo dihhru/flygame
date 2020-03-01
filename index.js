@@ -19,48 +19,47 @@ const sounds = [
     "a2"
   ], //Beethoven
   [
-    "C1",
-    "C1",
-    "G1",
-    "G1",
-    "A2",
-    "A2",
-    "G1",
-    "F1",
-    "F1",
-    "E1",
-    "E1",
-    "D1",
-    "D1",
-    "C1"
+    "c1",
+    "c1",
+    "g1",
+    "g1",
+    "a2",
+    "a2",
+    "g1",
+    "f1",
+    "f1",
+    "e1",
+    "e1",
+    "d1",
+    "d1",
+    "c1"
   ], //Mozart
-  ["D2", "G2", "G1", "B2", "D2", "D1", "G1", "A2", "B2", "G1", "G1", "G1"],
+  ["d2", "g2", "g1", "g2", "d2", "d1", "g1", "a2", "b2", "g1", "g1", "g1"],
   //Bach
   [
-    "C1",
-    "C1",
-    "G2",
-    "E2",
-    "C2",
-    "D2",
-    "B2",
-    "G1",
-    "C2",
-    "D2",
-    "E2",
-    "D2",
-    "C1",
-    "C1",
-    "G2",
-    "E2",
-    "C2",
-    "D2",
-    "B2",
-    "G1",
-    "C2",
-    "B2",
-    "A2",
-    "G1"
+    "c1",
+    "c1",
+    "g2",
+    "e2",
+    "c2",
+    "d2",
+    "b2",
+    "g1",
+    "d2",
+    "e2",
+    "d2",
+    "c1",
+    "c1",
+    "g2",
+    "e2",
+    "c2",
+    "d2",
+    "b2",
+    "g1",
+    "c2",
+    "b2",
+    "a2",
+    "g1"
   ]
   //Brahms
 ];
@@ -83,10 +82,30 @@ let notesPositions = [
   [1150, 140],
   [1200, 160]
 ];
+let authors = ["bach", "beethoven", "brahms", "mozart"];
 class Game {
   constructor() {
-    this.level = 0;
+    this.level = 1;
     this.activeNote = -1;
+  }
+  win() {
+    let div = document.createElement("img");
+    let img = authors[this.level];
+    div.style.width = "100px";
+    div.src = `images/${img}.gif`;
+    var canvas = document.getElementById("bg");
+    var ctx = canvas.getContext("2d");
+    ctx.drawImage(div, 600, 200, 100, 100);
+  }
+  levelUp() {
+    this.level++;
+    game.win();
+    let bg = document.getElementById("bg");
+    let pannel = authors[this.level];
+    bg.style.backgroundImage = `url(images/pannels/${pannel}_pannel.png)`;
+  }
+  togglePause() {
+    plane.speed = 0;
   }
   detectCollision(plane, note) {
     let bottomOfplane = plane.position.y + plane.size;
@@ -94,7 +113,6 @@ class Game {
     let topOfObject = note[1];
     let bottomOfObject = note[1] + 110;
     let leftSideOfObject = note[0];
-    let rightSideOfObject = note[0] + 110;
     if (
       bottomOfplane >= topOfObject &&
       topOfplane <= bottomOfObject &&
@@ -133,6 +151,12 @@ class Plane {
   }
   update() {
     this.position.x += this.distance;
+    if (this.position.x >= 1200) {
+      game.win();
+      setTimeout(() => (plane.position.x = 0), 2000);
+    } else {
+      this.draw();
+    }
   }
   draw() {
     var canvas = document.getElementById("bg");
@@ -174,12 +198,13 @@ class InputHandler {
         case 38:
           plane.moveUp();
           break;
-
         case 40:
           plane.moveDown();
           break;
-        // case 27:
-        //    game.togglePause();
+        case 13:
+          let range = document.getElementById("range").value;
+          range > 0 ? (range = 0) : (range = 25);
+          document.getElementById("range").value = range;
         //  break;
         //  case 32:
         //   game.start();
@@ -196,13 +221,12 @@ function gameLoop(timestamp) {
     let deltaTime = timestamp - lastTime;
     lastTime = timestamp;
     plane.update(deltaTime);
-    plane.draw();
     requestAnimationFrame(gameLoop);
   }, 15);
 }
 requestAnimationFrame(gameLoop);
 let plane = new Plane(1);
-let input = new InputHandler(plane);
+let input = new InputHandler(plane, game);
 game.drawNotes();
 plane.draw();
 setTimeout(function() {
