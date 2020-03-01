@@ -101,7 +101,7 @@ class Plane {
   constructor(speed) {
     this.image = "images/plane.png";
     this.speed = speed;
-    this.position = { x: 10, y: 150 };
+    this.position = { x: 0, y: 150 };
     this.size = 1;
     this.distance = 0;
   }
@@ -122,7 +122,7 @@ class Plane {
     ctx.clearRect(0, 0, 1200, 400);
     ctx.drawImage(image, this.position.x, this.position.y, 100, 100);
     let range = document.getElementById("range").value;
-    this.distance = 0.1 * range;
+    this.distance = 0.05 * range;
     cords.innerHTML =
       "x:" +
       Math.ceil(this.position.x) +
