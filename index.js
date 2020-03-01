@@ -66,34 +66,35 @@ const sounds = [
 ];
 let notesPositions = [
   [120, 100],
-  [140, 110],
-  [160, 100],
-  [180, 90],
-  [200, 100],
-  [220, 100],
-  [240, 120],
-  [260, 150],
-  [280, 130],
-  [300, 100],
-  [320, 110],
-  [340, 90],
-  [360, 100],
-  [380, 100],
-  [400, 80],
-  [420, 140],
-  [440, 160]
+  [200, 110],
+  [250, 100],
+  [360, 90],
+  [460, 100],
+  [520, 100],
+  [600, 120],
+  [650, 150],
+  [720, 130],
+  [820, 100],
+  [900, 110],
+  [950, 90],
+  [1000, 100],
+  [1050, 100],
+  [1100, 80],
+  [1150, 140],
+  [1200, 160]
 ];
 class Game {
   constructor() {
     this.level = 0;
   }
-  detectCollision(plane, gameObject) {
+  detectCollision(plane, note) {
     let bottomOfplane = plane.position.y + plane.size;
     let topOfplane = plane.position.y;
-    let topOfObject = gameObject.position.y;
-    let leftSideOfObject = gameObject.position.x;
-    let rightSideOfObject = gameObject.position.x + gameObject.width;
-    let bottomOfObject = gameObject.position.y + gameObject.height;
+    let topOfObject = note[1];
+    let bottomOfObject = note[1] + 50;
+    let leftSideOfObject = note[0];
+    let rightSideOfObject = note[0] + 50;
+
     if (
       bottomOfplane >= topOfObject &&
       topOfplane <= bottomOfObject &&
@@ -108,22 +109,21 @@ class Game {
   drawNotes() {
     var canvas = document.getElementById("bg");
     var ctx = canvas.getContext("2d");
-    let img = document.createElement("img");
-    img.src = "images/note.png";
-    img.style.width = "50px";
-    document.getElementById("cords").innerHTML = img;
+    let noteImg = document.getElementById("note");
+    ctx.drawImage(note, 150, 200, 100, 100);
     ctx.clearRect(0, 0, 1200, 400);
     notesPositions.map(function(note, index) {
-      ctx.drawImage(img, note[0], note[1], 100, 100);
+      ctx.drawImage(noteImg, note[0], note[1], 50, 50);
     });
   }
 }
+
 class Plane {
   constructor(speed) {
     this.image = "images/plane.png";
     this.speed = speed;
     this.position = { x: 0, y: 150 };
-    this.size = 1;
+    this.size = 100;
     this.distance = 0;
   }
   moveDown() {
@@ -141,7 +141,9 @@ class Plane {
     var image = document.getElementById("plane");
     let cords = document.getElementById("cords");
     ctx.clearRect(0, 0, 1200, 400);
+    game.drawNotes();
     ctx.drawImage(image, this.position.x, this.position.y, 100, 100);
+    game.detectCollision(plane);
     let range = document.getElementById("range").value;
     this.distance = 0.05 * range;
     cords.innerHTML =
