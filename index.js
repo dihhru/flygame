@@ -94,7 +94,6 @@ class Game {
     let bottomOfObject = note[1] + 50;
     let leftSideOfObject = note[0];
     let rightSideOfObject = note[0] + 50;
-
     if (
       bottomOfplane >= topOfObject &&
       topOfplane <= bottomOfObject &&
