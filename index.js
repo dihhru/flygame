@@ -64,6 +64,25 @@ const sounds = [
   ]
   //Brahms
 ];
+let notesPositions = [
+  [120, 100],
+  [140, 110],
+  [160, 100],
+  [180, 90],
+  [200, 100],
+  [220, 100],
+  [240, 120],
+  [260, 150],
+  [280, 130],
+  [300, 100],
+  [320, 110],
+  [340, 90],
+  [360, 100],
+  [380, 100],
+  [400, 80],
+  [420, 140],
+  [440, 160]
+];
 class Game {
   constructor() {
     this.level = 0;
@@ -87,13 +106,15 @@ class Game {
     }
   }
   drawNotes() {
-    let notes = sounds[this.level]; //slice or something
-    notes.map(function(note, index) {
-      let notes = document.getElementById("notes");
-      let img = document.createElement("img");
-      img.src = "images/note.png";
-      img.style.width = "50px";
-      notes.appendChild(img);
+    var canvas = document.getElementById("bg");
+    var ctx = canvas.getContext("2d");
+    let img = document.createElement("img");
+    img.src = "images/note.png";
+    img.style.width = "50px";
+    document.getElementById("cords").innerHTML = img;
+    ctx.clearRect(0, 0, 1200, 400);
+    notesPositions.map(function(note, index) {
+      ctx.drawImage(img, note[0], note[1], 100, 100);
     });
   }
 }
@@ -168,6 +189,7 @@ function gameLoop(timestamp) {
 requestAnimationFrame(gameLoop);
 let plane = new Plane(1);
 let input = new InputHandler(plane);
+game.drawNotes();
 plane.draw();
 setTimeout(function() {
   plane.draw();
