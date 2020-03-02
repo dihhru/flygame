@@ -2,9 +2,9 @@
   background-image: url(images/pannels/bach_pannel.png); /* Путь к фоновому изображению */
   background-size: contain;
   background-repeat: no-repeat;
-  width: 95vw;
-
+  width: 1200px;
   height: 400px;
+  position: relative;
 }
 #notes1 {
   display: flex;
@@ -16,4 +16,37 @@
 .img {
   width: 50px;
   height: 50px;
+}
+.au {
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 100px;
+  height: 100px;
+}
+.range {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  transform: rotate(270deg);
+  -webkit-appearance: none;
+  vertical-align: middle;
+  outline: none;
+  border: none;
+  padding: 0;
+  background: none;
+}
+
+.range::-webkit-slider-runnable-track {
+  background-color: #d7dbdd;
+  height: 6px;
+  border-radius: 3px;
+  border: 1px solid transparent;
+}
+.range::-webkit-slider-thumb {
+  -webkit-appearance: none !important;
+  border-radius: 100%;
+  background-color: #606670;
+  height: 18px;
+  width: 18px;
+  margin-top: -7px;
 }

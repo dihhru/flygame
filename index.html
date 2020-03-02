@@ -9,11 +9,24 @@
       <img id="plane" src="images/plane.png" width="104" height="74" />
       <img id="note" src="images/note.png" width="150" height="100" />
     </div>
-    <div style="display:flex">
+    <div style=" display:flex; justify-content: center;">
       <canvas width="1200" height="400" id="bg" class="bg"> </canvas>
+      <input
+        class="range"
+        id="range"
+        value="0"
+        max="100"
+        min="0"
+        type="range"
+      />
       <div>
-        <input id="range" value="0" max="100" min="0" type="range" />
-        <img id="rangeimg" src="images/speed1.png" width="150" height="100" />
+        <img
+          style="display:none"
+          id="rangeimg"
+          src="images/speed1.png"
+          width="150"
+          height="100"
+        />
       </div>
     </div>
     <div id="cords"></div>

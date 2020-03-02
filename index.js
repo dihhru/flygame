@@ -90,7 +90,6 @@ class Game {
     this.activeNote = -1;
   }
   win() {
-    alert(1);
     let _this = this;
     let div = document.createElement("img");
     let img = authors[this.level];
@@ -99,21 +98,23 @@ class Game {
     var canvas = document.getElementById("bg");
     var ctx = canvas.getContext("2d");
     let x = 100;
-    let pic1 = function() {
+    let int = setInterval(function() {
       x--;
-      ctx.clearRect(600, 400, 400, 400);
-      ctx.drawImage(div, 600, x, 400, 400);
+      if (x === 25) {
+        clearInterval(int);
+        _this.levelUp();
+      }
       console.log(x);
-    };
-    let win = setInterval(pic1(), 5);
-    setTimeout(() => {
-      _this.isStarted = true;
-      clearInterval(win);
-    }, 5000);
+      ctx.clearRect(0, 0, 1200, 400);
+      ctx.drawImage(div, 500, x, 200, 400);
+    }, 10);
   }
   levelUp() {
+    game.isStarted = true;
     this.level++;
-    game.win();
+    if (this.level == 4) {
+      this.level = 0;
+    }
     let bg = document.getElementById("bg");
     let pannel = authors[this.level];
     bg.style.backgroundImage = `url(images/pannels/${pannel}_pannel.png)`;
@@ -171,15 +172,27 @@ class Plane {
     if (this.position.x >= 1200) {
       game.win();
       game.isStarted = false;
+      this.position.x = 0;
     } else {
       this.draw();
     }
+  }
+  crash() {
+    let audio = document.createElement("audio");
+    audio.src = "sounds/crash_sound.wav";
+    audio.play();
   }
   draw() {
     var canvas = document.getElementById("bg");
     var ctx = canvas.getContext("2d");
     var image = document.getElementById("plane");
     let cords = document.getElementById("cords");
+    let y = this.position.y;
+    if (y >= 285 || y <= -45) {
+      this.crash();
+      this.position.y = 150;
+      this.position.x = 0;
+    }
     ctx.clearRect(0, 0, 1200, 400);
     game.drawNotes();
     ctx.drawImage(image, this.position.x, this.position.y, 100, 100);
