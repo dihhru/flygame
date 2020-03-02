@@ -105,13 +105,16 @@ class Game {
         clearInterval(int);
         _this.levelUp();
       }
-      console.log(x);
       ctx.clearRect(0, 0, 1200, 400);
       ctx.drawImage(div, 500, x, 200, 400);
     }, 10);
   }
   levelUp() {
     game.isStarted = true;
+    game.activeNote = -1;
+    game.scores = notesPositions.length;
+    let arr = [...notesPositions];
+    console.log(arr);
     this.level++;
     if (this.level == 4) {
       this.level = 0;
@@ -124,8 +127,6 @@ class Game {
     plane.speed = 0;
   }
   detectCollision(plane, note, index) {
-    this.scores--;
-    console.log(this.scores);
     let bottomOfplane = plane.position.y + plane.size;
     let topOfplane = plane.position.y;
     let topOfObject = note[1];
@@ -134,9 +135,12 @@ class Game {
     if (
       bottomOfplane >= topOfObject &&
       topOfplane <= bottomOfObject &&
-      plane.position.x + 50 >= leftSideOfObject
+      plane.position.x + 50 >= leftSideOfObject &&
+      note[2] !== 0
     ) {
+      this.scores--;
       notesPositions[index][2] = 0;
+      console.log(this.scores);
       return true;
     } else {
       return false;
@@ -175,11 +179,15 @@ class Plane {
     if (game.isStarted === false) {
       return;
     }
-    this.scores = notesPositions.length;
     this.position.x += this.distance;
     if (this.position.x >= 1200) {
       game.isStarted = false;
       this.position.x = 0;
+      if (game.scores > 3) {
+        game.level--;
+        game.levelUp();
+        return;
+      }
       game.win();
     } else {
       this.draw();
