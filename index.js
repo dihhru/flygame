@@ -85,17 +85,31 @@ let notesPositions = [
 let authors = ["bach", "beethoven", "brahms", "mozart"];
 class Game {
   constructor() {
+    this.isStarted = true;
     this.level = 1;
     this.activeNote = -1;
   }
   win() {
+    alert(1);
+    let _this = this;
     let div = document.createElement("img");
     let img = authors[this.level];
     div.style.width = "100px";
     div.src = `images/${img}.gif`;
     var canvas = document.getElementById("bg");
     var ctx = canvas.getContext("2d");
-    ctx.drawImage(div, 600, 200, 100, 100);
+    let x = 100;
+    let pic1 = function() {
+      x--;
+      ctx.clearRect(600, 400, 400, 400);
+      ctx.drawImage(div, 600, x, 400, 400);
+      console.log(x);
+    };
+    let win = setInterval(pic1(), 5);
+    setTimeout(() => {
+      _this.isStarted = true;
+      clearInterval(win);
+    }, 5000);
   }
   levelUp() {
     this.level++;
@@ -150,10 +164,13 @@ class Plane {
     this.position.y = this.position.y - 15;
   }
   update() {
+    if (game.isStarted === false) {
+      return;
+    }
     this.position.x += this.distance;
     if (this.position.x >= 1200) {
       game.win();
-      setTimeout(() => (plane.position.x = 0), 2000);
+      game.isStarted = false;
     } else {
       this.draw();
     }
