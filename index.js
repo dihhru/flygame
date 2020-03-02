@@ -85,10 +85,14 @@ let notesPositions = [
 let authors = ["bach", "beethoven", "brahms", "mozart"];
 class Game {
   constructor() {
-    this.scores = null;
+    this.scores = notesPositions.length;
     this.isStarted = true;
     this.level = 1;
+    this.notesPositions = [...notesPositions];
     this.activeNote = -1;
+  }
+  speed() {
+    document.getElementById("range").value = 10 + 20 * this.level;
   }
   win() {
     let _this = this;
@@ -113,8 +117,6 @@ class Game {
     game.isStarted = true;
     game.activeNote = -1;
     game.scores = notesPositions.length;
-    let arr = [...notesPositions];
-    console.log(arr);
     this.level++;
     if (this.level == 4) {
       this.level = 0;
@@ -122,6 +124,7 @@ class Game {
     let bg = document.getElementById("bg");
     let pannel = authors[this.level];
     bg.style.backgroundImage = `url(images/pannels/${pannel}_pannel.png)`;
+    this.speed();
   }
   togglePause() {
     plane.speed = 0;
@@ -139,8 +142,7 @@ class Game {
       note[2] !== 0
     ) {
       this.scores--;
-      notesPositions[index][2] = 0;
-      console.log(this.scores);
+      this.notesPositions[index][2] = 0;
       return true;
     } else {
       return false;
@@ -176,6 +178,8 @@ class Plane {
     this.position.y = this.position.y - 15;
   }
   update() {
+    let range = document.getElementById("range").value;
+    this.distance = 0.05 * range;
     if (game.isStarted === false) {
       return;
     }
@@ -184,8 +188,8 @@ class Plane {
       game.isStarted = false;
       this.position.x = 0;
       if (game.scores > 3) {
-        game.level--;
-        game.levelUp();
+        game.isStarted = true;
+        game.activeNote = -1;
         return;
       }
       game.win();
@@ -212,7 +216,7 @@ class Plane {
     ctx.clearRect(0, 0, 1200, 400);
     game.drawNotes();
     ctx.drawImage(image, this.position.x, this.position.y, 100, 100);
-    notesPositions.forEach((note, index) => {
+    game.notesPositions.forEach((note, index) => {
       if (game.activeNote !== index && index > game.activeNote) {
         let n = game.detectCollision(plane, note, index);
         if (n) {
@@ -227,7 +231,6 @@ class Plane {
       }
     });
     let range = document.getElementById("range").value;
-    this.distance = 0.05 * range;
     cords.innerHTML =
       "x:" +
       Math.ceil(this.position.x) +
