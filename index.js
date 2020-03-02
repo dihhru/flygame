@@ -64,31 +64,90 @@ const sounds = [
   //Brahms
 ];
 let notesPositions = [
-  [120, 100, 1],
-  [200, 110, 1],
-  [250, 100, 1],
-  [360, 90, 1],
-  [460, 100, 1],
-  [520, 100, 1],
-  [600, 120, 1],
-  [650, 150, 1],
-  [720, 130, 1],
-  [820, 100, 1],
-  [900, 110, 1],
-  [950, 90, 1],
-  [1000, 100, 1],
-  [1050, 100, 1],
-  [1100, 80, 1],
-  [1150, 140, 1],
-  [1200, 160, 1]
+  [
+    [120, 100, 1],
+    [200, 110, 1],
+    [250, 100, 1],
+    [360, 90, 1],
+    [460, 100, 1],
+    [520, 100, 1],
+    [600, 120, 1],
+    [650, 150, 1],
+    [720, 130, 1],
+    [820, 100, 1],
+    [900, 110, 1],
+    [950, 90, 1],
+    [1000, 100, 1],
+    [1050, 100, 1],
+    [1100, 80, 1],
+    [1150, 140, 1],
+    [1200, 160, 1]
+  ],
+  [
+    [120, 100, 1],
+    [200, 110, 1],
+    [250, 100, 1],
+    [360, 90, 1],
+    [460, 100, 1],
+    [520, 100, 1],
+    [600, 120, 1],
+    [650, 150, 1],
+    [720, 130, 1],
+    [820, 100, 1],
+    [900, 110, 1],
+    [950, 90, 1],
+    [1000, 100, 1],
+    [1050, 100, 1],
+    [1100, 80, 1],
+    [1150, 140, 1],
+    [1200, 160, 1]
+  ],
+  [
+    [120, 100, 1],
+    [200, 110, 1],
+    [250, 100, 1],
+    [360, 90, 1],
+    [460, 100, 1],
+    [520, 100, 1],
+    [600, 120, 1],
+    [650, 150, 1],
+    [720, 130, 1],
+    [820, 100, 1],
+    [900, 110, 1],
+    [950, 90, 1],
+    [1000, 100, 1],
+    [1050, 100, 1],
+    [1100, 80, 1],
+    [1150, 140, 1],
+    [1200, 160, 1]
+  ],
+  [
+    [120, 100, 1],
+    [200, 110, 1],
+    [250, 100, 1],
+    [360, 90, 1],
+    [460, 100, 1],
+    [520, 100, 1],
+    [600, 120, 1],
+    [650, 150, 1],
+    [720, 130, 1],
+    [820, 100, 1],
+    [900, 110, 1],
+    [950, 90, 1],
+    [1000, 100, 1],
+    [1050, 100, 1],
+    [1100, 80, 1],
+    [1150, 140, 1],
+    [1200, 160, 1]
+  ]
 ];
 let authors = ["bach", "beethoven", "brahms", "mozart"];
 class Game {
   constructor() {
     this.scores = notesPositions.length;
     this.isStarted = true;
-    this.level = 1;
-    this.notesPositions = [...notesPositions];
+    this.level = -1;
+    this.notesPositions = null;
     this.activeNote = -1;
   }
   speed() {
@@ -116,8 +175,9 @@ class Game {
   levelUp() {
     game.isStarted = true;
     game.activeNote = -1;
-    game.scores = notesPositions.length;
     this.level++;
+    game.notesPositions = notesPositions[game.level];
+    game.scores = notesPositions[game.level].length;
     if (this.level == 4) {
       this.level = 0;
     }
@@ -154,7 +214,7 @@ class Game {
     let noteImg = document.getElementById("note");
     ctx.drawImage(note, 150, 200, 100, 100);
     ctx.clearRect(0, 0, 1200, 400);
-    notesPositions.map(function(note) {
+    this.notesPositions.map(function(note) {
       if (note[2] === 0) {
         return;
       }
@@ -270,6 +330,9 @@ class InputHandler {
 }
 
 let game = new Game();
+let plane = new Plane(1);
+let input = new InputHandler(plane, game);
+game.levelUp();
 let lastTime = 0;
 function gameLoop(timestamp) {
   setTimeout(function() {
@@ -280,8 +343,6 @@ function gameLoop(timestamp) {
   }, 15);
 }
 requestAnimationFrame(gameLoop);
-let plane = new Plane(1);
-let input = new InputHandler(plane, game);
 game.drawNotes();
 plane.draw();
 setTimeout(function() {
