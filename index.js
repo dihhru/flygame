@@ -64,27 +64,28 @@ const sounds = [
   //Brahms
 ];
 let notesPositions = [
-  [120, 100],
-  [200, 110],
-  [250, 100],
-  [360, 90],
-  [460, 100],
-  [520, 100],
-  [600, 120],
-  [650, 150],
-  [720, 130],
-  [820, 100],
-  [900, 110],
-  [950, 90],
-  [1000, 100],
-  [1050, 100],
-  [1100, 80],
-  [1150, 140],
-  [1200, 160]
+  [120, 100, 1],
+  [200, 110, 1],
+  [250, 100, 1],
+  [360, 90, 1],
+  [460, 100, 1],
+  [520, 100, 1],
+  [600, 120, 1],
+  [650, 150, 1],
+  [720, 130, 1],
+  [820, 100, 1],
+  [900, 110, 1],
+  [950, 90, 1],
+  [1000, 100, 1],
+  [1050, 100, 1],
+  [1100, 80, 1],
+  [1150, 140, 1],
+  [1200, 160, 1]
 ];
 let authors = ["bach", "beethoven", "brahms", "mozart"];
 class Game {
   constructor() {
+    this.scores = null;
     this.isStarted = true;
     this.level = 1;
     this.activeNote = -1;
@@ -122,7 +123,9 @@ class Game {
   togglePause() {
     plane.speed = 0;
   }
-  detectCollision(plane, note) {
+  detectCollision(plane, note, index) {
+    this.scores--;
+    console.log(this.scores);
     let bottomOfplane = plane.position.y + plane.size;
     let topOfplane = plane.position.y;
     let topOfObject = note[1];
@@ -133,6 +136,7 @@ class Game {
       topOfplane <= bottomOfObject &&
       plane.position.x + 50 >= leftSideOfObject
     ) {
+      notesPositions[index][2] = 0;
       return true;
     } else {
       return false;
@@ -145,6 +149,9 @@ class Game {
     ctx.drawImage(note, 150, 200, 100, 100);
     ctx.clearRect(0, 0, 1200, 400);
     notesPositions.map(function(note) {
+      if (note[2] === 0) {
+        return;
+      }
       ctx.drawImage(noteImg, note[0], note[1], 50, 50);
     });
   }
@@ -168,11 +175,12 @@ class Plane {
     if (game.isStarted === false) {
       return;
     }
+    this.scores = notesPositions.length;
     this.position.x += this.distance;
     if (this.position.x >= 1200) {
-      game.win();
       game.isStarted = false;
       this.position.x = 0;
+      game.win();
     } else {
       this.draw();
     }
@@ -198,7 +206,7 @@ class Plane {
     ctx.drawImage(image, this.position.x, this.position.y, 100, 100);
     notesPositions.forEach((note, index) => {
       if (game.activeNote !== index && index > game.activeNote) {
-        let n = game.detectCollision(plane, note);
+        let n = game.detectCollision(plane, note, index);
         if (n) {
           game.activeNote = index;
           let soundId = sounds[0][index];
@@ -231,10 +239,16 @@ class InputHandler {
         case 40:
           plane.moveDown();
           break;
-        case 13:
-          let range = document.getElementById("range").value;
+        case 32:
+          var range = document.getElementById("range").value;
           range > 0 ? (range = 0) : (range = 25);
           document.getElementById("range").value = range;
+          break;
+        case 13:
+          var range = document.getElementById("range").value;
+          range > 0 ? (range = 0) : (range = 25);
+          document.getElementById("range").value = range;
+          break;
         //  break;
         //  case 32:
         //   game.start();
