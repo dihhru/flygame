@@ -34,7 +34,22 @@ const sounds = [
     "b2",
     "a2"
   ], //Beethoven
-  ["d2", "g2", "g1", "g2", "d2", "d1", "g1", "a2", "b2", "g1", "g1", "g1"],
+  [
+    "d2",
+    "g2",
+    "g1",
+    "b2",
+    "d2",
+    "d1",
+    "g1",
+    "a2",
+    "b2",
+    "a2",
+    "b2",
+    "g1",
+    "g1",
+    "g1"
+  ],
   //Bach
   [
     "c1",
@@ -108,20 +123,20 @@ let notesPositions = [
     [1000, 150, 1, 3]
   ], //beethoven
   [
-    [120, 100, 1, 0],
-    [200, 110, 1, 0],
-    [250, 100, 1, 0],
-    [360, 90, 1, 0],
-    [460, 100, 1, 0],
-    [520, 100, 1, 0],
-    [600, 120, 1, 1],
-    [650, 150, 1, 1],
-    [720, 130, 1, 0],
-    [820, 100, 1, 0],
-    [900, 110, 1, 0],
-    [950, 90, 1, 0],
-    [1000, 100, 1, 0],
-    [1050, 100, 1, 3]
+    [130, 90, 1, 0],
+    [180, 60, 1, 0],
+    [220, 110, 1, 0],
+    [270, 90, 1, 0],
+    [320, 80, 1, 0],
+    [370, 110, 1, 0],
+    [420, 95, 1, 1],
+    [470, 90, 1, 1],
+    [520, 85, 1, 0],
+    [570, 95, 1, 0],
+    [620, 85, 1, 0],
+    [670, 95, 1, 0],
+    [720, 95, 1, 0],
+    [770, 150, 1, 3]
   ], //bach
   [
     [50, 100, 1, , 1],
@@ -291,11 +306,13 @@ class Plane {
     game.drawNotes();
     ctx.drawImage(image, this.position.x, this.position.y, 100, 100);
     game.notesPositions.map((note, index) => {
-      if (game.activeNote !== index && index > game.activeNote) {
+      if (game.activeNote !== index && index >= game.activeNote) {
         let n = game.detectCollision(plane, note, index);
         if (n) {
           game.activeNote = index;
           let soundId = sounds[game.level][index];
+          console.log(game.level);
+          console.log(index);
           let src = `sounds/${soundId}.wav`;
           let audio = document.createElement("audio");
           audio.id = index;
