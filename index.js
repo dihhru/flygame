@@ -124,45 +124,45 @@ let notesPositions = [
   ], //beethoven
   [
     [130, 90, 1, 0],
-    [180, 60, 1, 0],
-    [220, 110, 1, 0],
-    [270, 90, 1, 0],
-    [320, 80, 1, 0],
-    [370, 110, 1, 0],
-    [420, 95, 1, 1],
-    [470, 90, 1, 1],
-    [520, 85, 1, 0],
-    [570, 95, 1, 0],
-    [620, 85, 1, 0],
-    [670, 95, 1, 0],
-    [720, 95, 1, 0],
-    [770, 150, 1, 3]
+    [190, 60, 1, 0],
+    [250, 110, 1, 0],
+    [310, 90, 1, 0],
+    [370, 80, 1, 0],
+    [430, 110, 1, 0],
+    [480, 95, 1, 1],
+    [540, 90, 1, 1],
+    [600, 85, 1, 0],
+    [660, 95, 1, 0],
+    [720, 85, 1, 0],
+    [780, 95, 1, 0],
+    [840, 95, 1, 0],
+    [900, 150, 1, 3]
   ], //bach
   [
-    [50, 100, 1, , 1],
-    [100, 110, 1, 1],
-    [150, 100, 1, 2],
-    [200, 90, 1, 1],
+    [70, 100, 1, 1],
+    [110, 100, 1, 1],
+    [165, 70, 1, 2],
+    [210, 90, 1, 1],
     [250, 100, 1, 1],
-    [300, 100, 1, 2],
+    [310, 85, 1, 2],
     [350, 120, 1, 1],
-    [400, 150, 1, 1],
-    [450, 130, 1, 0],
-    [500, 100, 1, 0],
-    [550, 110, 1, 0],
-    [600, 90, 1, 2, 2],
-    [650, 100, 1, 1],
-    [700, 100, 1, 1],
-    [750, 80, 1, 2],
-    [800, 140, 1, 1],
-    [850, 160, 1, 1],
-    [900, 80, 1, 2],
-    [950, 140, 1, 1],
-    [1000, 160, 1, 1],
-    [1050, 80, 1, 0],
-    [1100, 140, 1, 0],
-    [1100, 140, 1, 0],
-    [1100, 140, 1, 3]
+    [390, 130, 1, 1],
+    [450, 120, 1, 0],
+    [490, 110, 1, 0],
+    [530, 100, 1, 0],
+    [575, 110, 1, 2],
+    [620, 120, 1, 1],
+    [660, 120, 1, 1],
+    [720, 80, 1, 2],
+    [760, 110, 1, 1],
+    [800, 110, 1, 1],
+    [860, 110, 1, 2],
+    [900, 140, 1, 1],
+    [940, 160, 1, 1],
+    [990, 80, 1, 0],
+    [1030, 90, 1, 0],
+    [1070, 100, 1, 0],
+    [1110, 160, 1, 3]
   ] //brahms
 ];
 let authors = ["mozart", "beethoven", "bach", "brahms"];
@@ -170,12 +170,12 @@ class Game {
   constructor() {
     this.scores = notesPositions.length;
     this.isStarted = false;
-    this.level = 1;
+    this.level = 2;
     this.notesPositions = null;
     this.activeNote = -1;
   }
   speed() {
-    document.getElementById("range").value = 10 + 20 * this.level;
+    document.getElementById("range").value = 20 + 20 * this.level;
   }
   win() {
     let _this = this;
@@ -185,17 +185,19 @@ class Game {
     div.src = `images/${img}.gif`;
     var canvas = document.getElementById("bg");
     var ctx = canvas.getContext("2d");
-    let x = 100;
+    let x = 150;
     let int = setInterval(function() {
       x--;
-      if (x === 25) {
+      if (x === 0) {
         clearInterval(int);
-        _this.isStarted = true;
-        _this.levelUp();
+        setTimeout(() => {
+          _this.isStarted = true;
+          _this.levelUp();
+        }, 4000);
       }
       ctx.clearRect(0, 0, 1200, 400);
-      ctx.drawImage(div, 500, x, 200, 400);
-    }, 10);
+      ctx.drawImage(div, 275, x, 300, 400);
+    }, 50);
   }
   levelUp() {
     game.notesPositions = null;
@@ -247,7 +249,7 @@ class Game {
       let img = document.createElement("img");
       img.src = `images/notes/${note[3]}.png`;
       img.width = 150;
-      ctx.drawImage(img, note[0], note[1], 50, 75);
+      ctx.drawImage(img, note[0], note[1], 40, 75);
     });
   }
 }
@@ -256,7 +258,7 @@ class Plane {
   constructor(speed) {
     this.image = "images/plane.png";
     this.speed = speed;
-    this.position = { x: 0, y: 150 };
+    this.position = { x: -100, y: 150 };
     this.size = 100;
     this.distance = 0;
   }
@@ -300,7 +302,7 @@ class Plane {
     if (y >= 285 || y <= -45) {
       this.crash();
       this.position.y = 150;
-      this.position.x = 0;
+      this.position.x = -100;
     }
     ctx.clearRect(0, 0, 1200, 400);
     game.drawNotes();
