@@ -216,13 +216,14 @@ class Game {
     var canvas = document.getElementById("bg");
     var ctx = canvas.getContext("2d");
     let noteImg = document.getElementById("note");
-    ctx.drawImage(note, 150, 200, 100, 100);
+    let img = document.createElement("img");
+    img.src = "images/notes/note.png";
     ctx.clearRect(0, 0, 1200, 400);
     game.notesPositions.map(function(note) {
       if (note[2] === 0) {
         return;
       }
-      ctx.drawImage(noteImg, note[0], note[1], 50, 50);
+      ctx.drawImage(img, note[0], note[1], 50, 50);
     });
   }
 }
@@ -322,10 +323,6 @@ class InputHandler {
           var value = game.isStarted;
           game.isStarted = !value;
           break;
-        //  break;
-        //  case 32:
-        //   game.start();
-        //  break;
       }
     });
   }
