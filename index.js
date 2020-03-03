@@ -145,7 +145,7 @@ let authors = ["bach", "beethoven", "brahms", "mozart"];
 class Game {
   constructor() {
     this.scores = notesPositions.length;
-    this.isStarted = true;
+    this.isStarted = false;
     this.level = -1;
     this.notesPositions = null;
     this.activeNote = -1;
@@ -166,6 +166,7 @@ class Game {
       x--;
       if (x === 25) {
         clearInterval(int);
+        _this.isStarted = true;
         _this.levelUp();
       }
       ctx.clearRect(0, 0, 1200, 400);
@@ -173,13 +174,15 @@ class Game {
     }, 10);
   }
   levelUp() {
-    game.isStarted = true;
+    game.notesPositions = null;
     game.activeNote = -1;
     game.level++;
     if (game.level == 3) {
       game.level = 0;
     }
-    game.notesPositions = Array.from(notesPositions[game.level]);
+    game.notesPositions = JSON.parse(
+      JSON.stringify(notesPositions[game.level])
+    );
     game.scores = notesPositions[game.level].length;
     let bg = document.getElementById("bg");
     let pannel = authors[this.level];
@@ -187,6 +190,7 @@ class Game {
     this.speed();
   }
   togglePause() {
+    console.log(notesPositions);
     plane.speed = 0;
   }
   detectCollision(plane, note, index) {
@@ -276,7 +280,7 @@ class Plane {
     ctx.clearRect(0, 0, 1200, 400);
     game.drawNotes();
     ctx.drawImage(image, this.position.x, this.position.y, 100, 100);
-    game.notesPositions.forEach((note, index) => {
+    game.notesPositions.map((note, index) => {
       if (game.activeNote !== index && index > game.activeNote) {
         let n = game.detectCollision(plane, note, index);
         if (n) {
@@ -311,14 +315,12 @@ class InputHandler {
           plane.moveDown();
           break;
         case 32:
-          var range = document.getElementById("range").value;
-          range > 0 ? (range = 0) : (range = 25);
-          document.getElementById("range").value = range;
+          var value = game.isStarted;
+          game.isStarted = !value;
           break;
         case 13:
-          var range = document.getElementById("range").value;
-          range > 0 ? (range = 0) : (range = 25);
-          document.getElementById("range").value = range;
+          var value = game.isStarted;
+          game.isStarted = !value;
           break;
         //  break;
         //  case 32:
