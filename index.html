@@ -5,9 +5,27 @@
   </head>
 
   <body>
-    <div>
-      Hello world!
+    <div style="display:none;">
+      <img id="plane" src="images/plane.png" width="104" height="74" />
     </div>
-    <script type="text/javascript" src="index.js"></script>
+    <div class="bg">
+    <div style="width:1200px; flex-direction:column; position:relative; display:flex; justify-content: center;">
+      <canvas width="1200" height="400" id="bg" class="bg"> </canvas>
+      <div>
+<input class="range" id="range" value="0" max="100" min="0" type="range" />
+      </div>
+    </div>
+      <div>
+        <img
+          style="display:none"
+          id="rangeimg"
+          src="images/speed1.png"
+          width="150"
+          height="100"
+        />
+      </div>
+    </div>
+      </div>
   </body>
+  <script type="text/javascript" defer src="index.js"></script>
 </html>
