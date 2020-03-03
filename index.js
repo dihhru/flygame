@@ -179,7 +179,7 @@ class Game {
     if (game.level == 3) {
       game.level = 0;
     }
-    game.notesPositions = [...notesPositions[game.level]];
+    game.notesPositions = Array.from(notesPositions[game.level]);
     game.scores = notesPositions[game.level].length;
     let bg = document.getElementById("bg");
     let pannel = authors[this.level];
