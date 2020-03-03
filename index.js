@@ -185,10 +185,10 @@ class Game {
     div.src = `images/${img}.gif`;
     var canvas = document.getElementById("bg");
     var ctx = canvas.getContext("2d");
-    let x = 150;
+    let x = 250;
     let int = setInterval(function() {
       x--;
-      if (x === 0) {
+      if (x === 80) {
         clearInterval(int);
         setTimeout(() => {
           _this.isStarted = true;
@@ -196,8 +196,8 @@ class Game {
         }, 4000);
       }
       ctx.clearRect(0, 0, 1200, 400);
-      ctx.drawImage(div, 275, x, 300, 400);
-    }, 50);
+      ctx.drawImage(div, 500, x, 200, 300);
+    }, 5);
   }
   levelUp() {
     game.notesPositions = null;
