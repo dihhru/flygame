@@ -175,12 +175,12 @@ class Game {
   levelUp() {
     game.isStarted = true;
     game.activeNote = -1;
-    this.level++;
-    game.notesPositions = notesPositions[game.level];
-    game.scores = notesPositions[game.level].length;
-    if (this.level == 4) {
-      this.level = 0;
+    game.level++;
+    if (game.level == 3) {
+      game.level = 0;
     }
+    game.notesPositions = [...notesPositions[game.level]];
+    game.scores = notesPositions[game.level].length;
     let bg = document.getElementById("bg");
     let pannel = authors[this.level];
     bg.style.backgroundImage = `url(images/pannels/${pannel}_pannel.png)`;
@@ -201,8 +201,8 @@ class Game {
       plane.position.x + 50 >= leftSideOfObject &&
       note[2] !== 0
     ) {
-      this.scores--;
-      this.notesPositions[index][2] = 0;
+      game.scores--;
+      game.notesPositions[index][2] = 0;
       return true;
     } else {
       return false;
@@ -214,7 +214,7 @@ class Game {
     let noteImg = document.getElementById("note");
     ctx.drawImage(note, 150, 200, 100, 100);
     ctx.clearRect(0, 0, 1200, 400);
-    this.notesPositions.map(function(note) {
+    game.notesPositions.map(function(note) {
       if (note[2] === 0) {
         return;
       }
