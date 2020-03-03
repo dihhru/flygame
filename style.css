@@ -1,10 +1,8 @@
 .bg {
-  background-image: url(images/pannels/bach_pannel.png); /* Путь к фоновому изображению */
   background-size: contain;
   background-repeat: no-repeat;
-  width: 1200px;
-  height: 400px;
-  position: relative;
+  display: flex;
+  justify-content: center;
 }
 #notes1 {
   display: flex;
@@ -24,10 +22,8 @@
   height: 100px;
 }
 .range {
-  position: absolute;
   top: 40%;
   right: 0px;
-  transform: rotate(270deg);
   -webkit-appearance: none;
   vertical-align: middle;
   outline: none;

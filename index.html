@@ -8,16 +8,13 @@
     <div style="display:none;">
       <img id="plane" src="images/plane.png" width="104" height="74" />
     </div>
-    <div style="position:relative; display:flex; justify-content: center;">
+    <div class="bg">
+    <div style="width:1200px; flex-direction:column; position:relative; display:flex; justify-content: center;">
       <canvas width="1200" height="400" id="bg" class="bg"> </canvas>
-      <input
-        class="range"
-        id="range"
-        value="0"
-        max="100"
-        min="0"
-        type="range"
-      />
+      <div>
+<input class="range" id="range" value="0" max="100" min="0" type="range" />
+      </div>
+    </div>
       <div>
         <img
           style="display:none"
@@ -28,7 +25,7 @@
         />
       </div>
     </div>
-    <div id="cords"></div>
+      </div>
   </body>
   <script type="text/javascript" defer src="index.js"></script>
 </html>
