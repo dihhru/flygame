@@ -87,25 +87,25 @@ let notesPositions = [
     [930, 150, 1, 3]
   ], //mozart
   [
-    [160, 100, 1, 0],
-    [210, 110, 1, 0],
-    [260, 100, 1, 0],
-    [310, 110, 1, 0],
-    [360, 100, 1, 0],
-    [410, 120, 1, 0],
-    [460, 110, 1, 0],
-    [510, 110, 1, 0],
-    [560, 130, 1, 2],
+    [140, 100, 1, 0],
+    [190, 110, 1, 0],
+    [240, 100, 1, 0],
+    [290, 110, 1, 0],
+    [340, 100, 1, 0],
+    [390, 120, 1, 0],
+    [440, 110, 1, 0],
+    [490, 120, 1, 0],
+    [540, 140, 1, 2],
 
-    [650, 160, 1, 0],
-    [700, 140, 1, 0],
-    [750, 120, 1, 0],
-    [810, 110, 1, 2],
+    [620, 160, 1, 0],
+    [670, 140, 1, 0],
+    [720, 120, 1, 0],
+    [780, 110, 1, 2],
 
-    [870, 100, 1, 0],
-    [920, 80, 1, 0],
-    [970, 140, 1, 0],
-    [1020, 160, 1, 3]
+    [850, 130, 1, 0],
+    [900, 100, 1, 0],
+    [950, 110, 1, 0],
+    [1000, 150, 1, 3]
   ], //beethoven
   [
     [120, 100, 1, 0],
@@ -155,7 +155,7 @@ class Game {
   constructor() {
     this.scores = notesPositions.length;
     this.isStarted = false;
-    this.level = 0;
+    this.level = 1;
     this.notesPositions = null;
     this.activeNote = -1;
   }
@@ -295,7 +295,7 @@ class Plane {
         let n = game.detectCollision(plane, note, index);
         if (n) {
           game.activeNote = index;
-          let soundId = sounds[0][index];
+          let soundId = sounds[game.level][index];
           let src = `sounds/${soundId}.wav`;
           let audio = document.createElement("audio");
           audio.id = index;
