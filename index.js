@@ -187,7 +187,7 @@ class Game {
     var canvas = document.getElementById("bg");
     var ctx = canvas.getContext("2d");
     let x = 250;
-    let int = setInterval(function() {
+    let int = setInterval(function () {
       x--;
       if (x === 80) {
         clearInterval(int);
@@ -255,7 +255,7 @@ class Game {
     var canvas = document.getElementById("bg");
     var ctx = canvas.getContext("2d");
     ctx.clearRect(0, 0, 1200, 400);
-    game.notesPositions.map(function(note) {
+    game.notesPositions.map(function (note) {
       if (note[2] === 0) {
         return;
       }
@@ -367,7 +367,7 @@ game.levelUp();
 game.createSounds();
 let lastTime = 0;
 function gameLoop(timestamp) {
-  setTimeout(function() {
+  setTimeout(function () {
     let deltaTime = timestamp - lastTime;
     lastTime = timestamp;
     plane.update(deltaTime);
@@ -377,6 +377,6 @@ function gameLoop(timestamp) {
 requestAnimationFrame(gameLoop);
 game.drawNotes();
 plane.draw();
-setTimeout(function() {
+setTimeout(function () {
   plane.draw();
 }, 900);
