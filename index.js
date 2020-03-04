@@ -195,7 +195,7 @@ class Game {
         clearInterval(int);
         setTimeout(() => {
           _this.levelUp();
-          _this.isStarted = true;
+          setTimeout(() => (_this.isStarted = true), 1000);
         }, 4000);
       }
       ctx.clearRect(0, 0, 1200, 400);
