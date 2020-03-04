@@ -180,6 +180,10 @@ class Game {
     document.getElementById("range").value = 20 + 20 * this.level;
   }
   win() {
+    uniq.map(x => {
+      document.getElementById(x).pause();
+      document.getElementById(x).currentTime = 0;
+    });
     let _this = this;
     let div = document.createElement("img");
     let img = authors[game.level];
