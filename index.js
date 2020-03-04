@@ -361,7 +361,7 @@ class InputHandler {
     });
   }
 }
-console.log(6);
+console.log(7);
 let game = new Game();
 game.createSounds();
 let plane = new Plane(1);
