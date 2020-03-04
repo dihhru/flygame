@@ -195,8 +195,8 @@ class Game {
         clearInterval(int);
         setTimeout(() => {
           _this.levelUp();
-          setTimeout(() => (_this.isStarted = true), 1000);
-        }, 4000);
+          setTimeout(() => (_this.isStarted = true), 3000);
+        }, 1000);
       }
       ctx.clearRect(0, 0, 1200, 400);
       ctx.drawImage(img, 500, x, 200, 300);
@@ -216,15 +216,10 @@ class Game {
     let root = document.getElementById("root");
     let pannel = document.getElementById("pannel");
     root.removeChild(pannel);
-    let newPannel = document.createElement("img");
-    let bg = authors[this.level];
-    newPannel.src = `images/pannels/${bg}_pannel.png`;
+    let newPannel = document.getElementById(authors[this.level] + "_pannel");
     newPannel.id = "pannel";
     newPannel.className = "pannel";
     root.appendChild(newPannel);
-    console.log(game);
-    console.log(this);
-    console.log(bg);
     this.speed();
   }
   togglePause() {
