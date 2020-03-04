@@ -214,7 +214,8 @@ class Game {
     let root = document.getElementById("root");
     let pannel = document.getElementById("pannel");
     root.removeChild(pannel);
-    let newPannel = document.getElementById(authors[this.level] + "_pannel");
+    let oldPannel = document.getElementById(authors[this.level] + "_pannel");
+    let newPannel = oldPannel.cloneNode();
     newPannel.id = "pannel";
     newPannel.className = "pannel";
     root.appendChild(newPannel);
