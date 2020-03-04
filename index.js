@@ -171,7 +171,7 @@ let uniq;
 class Game {
   constructor() {
     this.scores = notesPositions.length;
-    this.isStarted = true;
+    this.isStarted = false;
     this.level = -1;
     this.notesPositions = null;
     this.activeNote = -1;
@@ -275,7 +275,7 @@ class Plane {
   constructor(speed) {
     this.image = "images/plane.png";
     this.speed = speed;
-    this.position = { x: -100, y: 145 };
+    this.position = { x: -100, y: 250 };
     this.size = 100;
     this.distance = 0;
   }
