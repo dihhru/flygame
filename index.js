@@ -167,11 +167,12 @@ let notesPositions = [
   ] //brahms
 ];
 let authors = ["mozart", "beethoven", "bach", "brahms"];
+let uniq;
 class Game {
   constructor() {
     this.scores = notesPositions.length;
     this.isStarted = false;
-    this.level = 2;
+    this.level = -1;
     this.notesPositions = null;
     this.activeNote = -1;
   }
@@ -243,7 +244,7 @@ class Game {
     let files = JSON.parse(JSON.stringify(sounds));
     let arr = files.flat(Infinity);
     let bg = document.getElementById("bg");
-    var uniq = Array.from(new Set(arr));
+    uniq = Array.from(new Set(arr));
     uniq.map(sound => {
       let doc = document.createElement("audio");
       doc.src = `sounds/${sound}.wav`;
@@ -323,6 +324,10 @@ class Plane {
       if (game.activeNote !== index && index >= game.activeNote) {
         let n = game.detectCollision(plane, note, index);
         if (n) {
+          uniq.map(x => {
+            document.getElementById(x).pause();
+            document.getElementById(x).currentTime = 0;
+          });
           game.activeNote = index;
           let soundId = sounds[game.level][index];
           let audio = document.getElementById(soundId);
