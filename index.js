@@ -376,7 +376,7 @@ setTimeout(() => {
     plane.draw();
   }, 1000);
   document.getElementById("loading").style.display = "none";
-}, 7000);
+}, 13000);
 let lastTime = 0;
 function gameLoop(timestamp) {
   setTimeout(function() {
