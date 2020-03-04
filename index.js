@@ -239,6 +239,18 @@ class Game {
       return false;
     }
   }
+  createSounds() {
+    let files = JSON.parse(JSON.stringify(sounds));
+    let arr = files.flat(Infinity);
+    let bg = document.getElementById("bg");
+    var uniq = Array.from(new Set(arr));
+    uniq.map(sound => {
+      let doc = document.createElement("audio");
+      doc.src = `sounds/${sound}.wav`;
+      doc.id = sound;
+      bg.appendChild(doc);
+    });
+  }
   drawNotes() {
     var canvas = document.getElementById("bg");
     var ctx = canvas.getContext("2d");
@@ -298,7 +310,10 @@ class Plane {
     var canvas = document.getElementById("bg");
     var ctx = canvas.getContext("2d");
     var image = document.getElementById("plane");
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
     let y = this.position.y;
     if (y >= 285 || y <= -45) {
       this.crash();
@@ -314,12 +329,7 @@ class Plane {
         if (n) {
           game.activeNote = index;
           let soundId = sounds[game.level][index];
-          console.log(game.level);
-          console.log(index);
-          let src = `sounds/${soundId}.wav`;
-          let audio = document.createElement("audio");
-          audio.id = index;
-          audio.src = src;
+          let audio = document.getElementById(soundId);
           audio.play();
         }
       }
@@ -354,6 +364,7 @@ let game = new Game();
 let plane = new Plane(1);
 let input = new InputHandler(plane, game);
 game.levelUp();
+game.createSounds();
 let lastTime = 0;
 function gameLoop(timestamp) {
   setTimeout(function() {
