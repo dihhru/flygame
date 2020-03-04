@@ -213,9 +213,9 @@ class Game {
       JSON.stringify(notesPositions[game.level])
     );
     game.scores = notesPositions[game.level].length;
-    let bg = document.getElementById("bg");
-    let pannel = authors[this.level];
-    bg.style.backgroundImage = `url(images/pannels/${pannel}_pannel.png)`;
+    let pannel = document.getElementById("pannel");
+    let bg = authors[this.level];
+    pannel.src = `images/pannels/${bg}_pannel.png`;
     this.speed();
   }
   togglePause() {
@@ -376,7 +376,7 @@ setTimeout(() => {
     plane.draw();
   }, 1000);
   document.getElementById("loading").style.display = "none";
-}, 12000);
+}, 7000);
 let lastTime = 0;
 function gameLoop(timestamp) {
   setTimeout(function() {
