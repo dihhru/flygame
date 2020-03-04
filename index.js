@@ -182,7 +182,7 @@ class Game {
   win() {
     let _this = this;
     let div = document.createElement("img");
-    let img = authors[this.level];
+    let img = authors[game.level];
     div.style.width = "100px";
     div.src = `images/${img}.gif`;
     var canvas = document.getElementById("bg");
@@ -197,6 +197,8 @@ class Game {
           _this.levelUp();
         }, 4000);
       }
+      console.log(ctx);
+      console.log(div);
       ctx.clearRect(0, 0, 1200, 400);
       ctx.drawImage(div, 500, x, 200, 300);
     }, 5);
