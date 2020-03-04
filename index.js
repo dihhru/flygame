@@ -361,7 +361,7 @@ class InputHandler {
     });
   }
 }
-console.log(14);
+console.log(15);
 let game = new Game();
 game.createSounds();
 let plane = new Plane(1);
@@ -384,5 +384,5 @@ function gameLoop(timestamp) {
     lastTime = timestamp;
     plane.update(deltaTime);
     requestAnimationFrame(gameLoop);
-  }, 15);
+  }, 25);
 }
