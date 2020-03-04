@@ -191,8 +191,8 @@ class Game {
         clearInterval(int);
         setTimeout(() => {
           _this.levelUp();
-          setTimeout(() => (_this.isStarted = true), 3000);
-        }, 1000);
+          setTimeout(() => (_this.isStarted = true), 2000);
+        }, 2000);
       }
       ctx.clearRect(0, 0, 1200, 400);
       ctx.drawImage(img, 500, x, 200, 300);
