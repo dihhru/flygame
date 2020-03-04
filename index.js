@@ -360,7 +360,7 @@ class InputHandler {
     });
   }
 }
-console.log(17);
+console.log(18);
 let game = new Game();
 game.createSounds();
 let plane = new Plane(1);
@@ -375,7 +375,7 @@ setTimeout(() => {
     plane.draw();
   }, 1000);
   document.getElementById("loading").style.display = "none";
-}, 18000);
+}, 20000);
 let lastTime = 0;
 function gameLoop(timestamp) {
   setTimeout(function() {
