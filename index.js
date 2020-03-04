@@ -365,10 +365,17 @@ let game = new Game();
 game.createSounds();
 let plane = new Plane(1);
 let input = new InputHandler(plane, game);
-game.levelUp();
+
 setTimeout(() => {
+  game.levelUp();
+  requestAnimationFrame(gameLoop);
+  game.drawNotes();
+  plane.draw();
+  setTimeout(function() {
+    plane.draw();
+  }, 1000);
   document.getElementById("loading").style.display = "none";
-}, 9000);
+}, 12000);
 let lastTime = 0;
 function gameLoop(timestamp) {
   setTimeout(function() {
@@ -378,9 +385,3 @@ function gameLoop(timestamp) {
     requestAnimationFrame(gameLoop);
   }, 15);
 }
-requestAnimationFrame(gameLoop);
-game.drawNotes();
-plane.draw();
-setTimeout(function() {
-  plane.draw();
-}, 900);
