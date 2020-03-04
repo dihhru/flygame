@@ -185,10 +185,7 @@ class Game {
       document.getElementById(x).currentTime = 0;
     });
     let _this = this;
-    let div = document.createElement("img");
-    let img = authors[game.level];
-    div.style.width = "100px";
-    div.src = `images/${img}.gif`;
+    let img = document.getElementById(authors[game.level]);
     var canvas = document.getElementById("bg");
     var ctx = canvas.getContext("2d");
     let x = 250;
@@ -197,14 +194,12 @@ class Game {
       if (x === 80) {
         clearInterval(int);
         setTimeout(() => {
-          _this.isStarted = true;
           _this.levelUp();
+          _this.isStarted = true;
         }, 4000);
       }
-      console.log(ctx);
-      console.log(div);
       ctx.clearRect(0, 0, 1200, 400);
-      ctx.drawImage(div, 500, x, 200, 300);
+      ctx.drawImage(img, 500, x, 200, 300);
     }, 5);
   }
   levelUp() {
@@ -366,7 +361,7 @@ class InputHandler {
     });
   }
 }
-console.log(4);
+console.log(5);
 let game = new Game();
 game.createSounds();
 let plane = new Plane(1);
