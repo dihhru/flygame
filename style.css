@@ -45,3 +45,12 @@
   width: 18px;
   margin-top: -7px;
 }
+.loading {
+  width: 1200px;
+  height: 420px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  background-color: black;
+}
