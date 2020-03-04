@@ -214,8 +214,11 @@ class Game {
     );
     game.scores = notesPositions[game.level].length;
     let pannel = document.getElementById("pannel");
-    let bg = authors[game.level];
+    let bg = authors[this.level];
     pannel.src = `images/pannels/${bg}_pannel.png`;
+    console.log(game);
+    console.log(this);
+    console.log(bg);
     this.speed();
   }
   togglePause() {
