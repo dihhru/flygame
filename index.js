@@ -219,6 +219,7 @@ class Game {
     let newPannel = document.createElement("img");
     let bg = authors[this.level];
     newPannel.src = `images/pannels/${bg}_pannel.png`;
+    newPannel.id = "pannel";
     newPannel.className = "pannel";
     root.appendChild(newPannel);
     console.log(game);
