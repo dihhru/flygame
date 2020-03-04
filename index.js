@@ -180,9 +180,6 @@ class Game {
     document.getElementById("range").value = 20 + 20 * this.level;
   }
   win() {
-    uniq.map(x => {
-      document.getElementById(x).currentTime = 0;
-    });
     let _this = this;
     let img = document.getElementById(authors[this.level]);
     var canvas = document.getElementById("bg");
@@ -328,9 +325,6 @@ class Plane {
       if (game.activeNote !== index && index >= game.activeNote) {
         let n = game.detectCollision(plane, note, index);
         if (n) {
-          uniq.map(x => {
-            document.getElementById(x).currentTime = 0;
-          });
           game.activeNote = index;
           let soundId = sounds[game.level][index];
           let audio = document.getElementById(soundId);
