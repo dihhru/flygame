@@ -181,11 +181,10 @@ class Game {
   }
   win() {
     uniq.map(x => {
-      document.getElementById(x).pause();
       document.getElementById(x).currentTime = 0;
     });
     let _this = this;
-    let img = document.getElementById(authors[game.level]);
+    let img = document.getElementById(authors[this.level]);
     var canvas = document.getElementById("bg");
     var ctx = canvas.getContext("2d");
     let x = 250;
@@ -248,7 +247,7 @@ class Game {
   createSounds() {
     let files = JSON.parse(JSON.stringify(sounds));
     let arr = files.flat(Infinity);
-    let bg = document.getElementById("bg");
+    let bg = document.getElementById("res");
     uniq = Array.from(new Set(arr));
     uniq.map(sound => {
       let doc = document.createElement("audio");
@@ -330,7 +329,6 @@ class Plane {
         let n = game.detectCollision(plane, note, index);
         if (n) {
           uniq.map(x => {
-            document.getElementById(x).pause();
             document.getElementById(x).currentTime = 0;
           });
           game.activeNote = index;
