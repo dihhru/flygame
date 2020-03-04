@@ -360,7 +360,6 @@ class InputHandler {
     });
   }
 }
-
 let game = new Game();
 game.createSounds();
 let plane = new Plane(1);
@@ -368,7 +367,7 @@ let input = new InputHandler(plane, game);
 game.levelUp();
 setTimeout(() => {
   document.getElementById("loading").style.display = "none";
-}, 10000);
+}, 9000);
 let lastTime = 0;
 function gameLoop(timestamp) {
   setTimeout(function() {
