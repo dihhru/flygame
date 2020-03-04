@@ -264,9 +264,8 @@ class Game {
       if (note[2] === 0) {
         return;
       }
-      let img = document.createElement("img");
-      img.src = `images/notes/${note[3]}.png`;
-      img.width = 150;
+      let note = document.getElementById(note[3]);
+      let img = note.cloneNode();
       ctx.drawImage(img, note[0], note[1], 40, 75);
     });
   }
