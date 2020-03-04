@@ -55,3 +55,9 @@
   position: absolute;
   background-color: black;
 }
+.pannel {
+  z-index: -1;
+  width: 1200px;
+  height: 378px;
+  position: absolute;
+}

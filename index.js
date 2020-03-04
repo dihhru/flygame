@@ -213,9 +213,14 @@ class Game {
       JSON.stringify(notesPositions[game.level])
     );
     game.scores = notesPositions[game.level].length;
+    let root = document.getElementById("root");
     let pannel = document.getElementById("pannel");
+    root.removeChild(pannel);
+    let newPanel = document.createElement("img");
     let bg = authors[this.level];
-    pannel.src = `images/pannels/${bg}_pannel.png`;
+    newPannel.src = `images/pannels/${bg}_pannel.png`;
+    newPannel.className = "pannel";
+    root.appendChild(newPannel);
     console.log(game);
     console.log(this);
     console.log(bg);
