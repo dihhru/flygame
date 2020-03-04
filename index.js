@@ -181,7 +181,7 @@ class Game {
   }
   win() {
     let _this = this;
-    let img = document.getElementById(authors[this.level]);
+    let img = document.getElementById(authors[game.level]);
     var canvas = document.getElementById("bg");
     var ctx = canvas.getContext("2d");
     let x = 250;
@@ -208,6 +208,8 @@ class Game {
     game.notesPositions = JSON.parse(
       JSON.stringify(notesPositions[game.level])
     );
+    console.log(game);
+    console.log(this);
     game.scores = notesPositions[game.level].length;
     let root = document.getElementById("root");
     let pannel = document.getElementById("pannel");
