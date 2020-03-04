@@ -328,6 +328,7 @@ class Plane {
           game.activeNote = index;
           let soundId = sounds[game.level][index];
           let audio = document.getElementById(soundId);
+          audio.currentTime = 0;
           audio.play();
         }
       }
