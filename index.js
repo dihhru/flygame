@@ -276,7 +276,7 @@ class Plane {
   constructor(speed) {
     this.image = "images/plane.png";
     this.speed = speed;
-    this.position = { x: -100, y: 150 };
+    this.position = { x: -100, y: 250 };
     this.size = 100;
     this.distance = 0;
   }
@@ -318,7 +318,7 @@ class Plane {
     let y = this.position.y;
     if (y >= 285 || y <= -45) {
       this.crash();
-      this.position.y = 150;
+      this.position.y = 250;
       this.position.x = -100;
     }
     ctx.clearRect(0, 0, 1200, 400);
