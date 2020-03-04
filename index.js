@@ -216,7 +216,7 @@ class Game {
     let root = document.getElementById("root");
     let pannel = document.getElementById("pannel");
     root.removeChild(pannel);
-    let newPanel = document.createElement("img");
+    let newPannel = document.createElement("img");
     let bg = authors[this.level];
     newPannel.src = `images/pannels/${bg}_pannel.png`;
     newPannel.className = "pannel";
