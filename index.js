@@ -79,6 +79,7 @@ const sounds = [
   ]
   //Brahms
 ];
+
 let notesPositions = [
   [
     [130, 100, 1, 0],
@@ -167,6 +168,8 @@ let notesPositions = [
   ] //brahms
 ];
 let authors = ["mozart", "beethoven", "bach", "brahms"];
+let game = new Game();
+game.createSounds();
 class Game {
   constructor() {
     this.scores = notesPositions.length;
@@ -356,14 +359,12 @@ class InputHandler {
   }
 }
 
-let game = new Game();
 let plane = new Plane(1);
 let input = new InputHandler(plane, game);
 game.levelUp();
-game.createSounds();
 setTimeout(() => {
   document.getElementById("loading").style.display = "none";
-}, 5000);
+}, 10000);
 let lastTime = 0;
 function gameLoop(timestamp) {
   setTimeout(function() {
