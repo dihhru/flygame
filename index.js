@@ -111,6 +111,7 @@ function loadAudio(resolve) {
         counter[i] = 1;
         let sum = counter.reduce((a, b) => a + b);
         progress.style.width = (100 / length) * sum + "%";
+        console.log(sum);
         if (sum === length) {
           res();
         }
