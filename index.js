@@ -212,7 +212,7 @@ class Game {
   win() {
     let _this = this;
     let img = document.getElementById(authors[game.level]);
-    var canvas = document.getElementById("bg");
+    var canvas = document.getElementById("canvas");
     var ctx = canvas.getContext("2d");
     let x = 250;
     let int = setInterval(function() {
@@ -282,7 +282,7 @@ class Game {
     }
   }
   drawNotes() {
-    var canvas = document.getElementById("bg");
+    var canvas = document.getElementById("canvas");
     var ctx = canvas.getContext("2d");
     ctx.clearRect(0, 0, 1200, 400);
     game.notesPositions.map(function(note) {
@@ -336,7 +336,7 @@ class Plane {
     audio.play();
   }
   draw() {
-    var canvas = document.getElementById("bg");
+    var canvas = document.getElementById("canvas");
     var ctx = canvas.getContext("2d");
     var image = document.getElementById("plane");
     let y = this.position.y;
