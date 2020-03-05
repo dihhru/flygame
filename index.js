@@ -91,11 +91,12 @@ function loadAudio(resolve) {
   let set = new Set(arr);
   console.log(set);
   uniq = Array.from(set);
-
+  let counter = [];
   let length = uniq.length;
   let i = 0;
   let progress = document.getElementById("progressBar");
   while (i < length) {
+    counter[i] = 0;
     let index = i;
     let sound = uniq[i];
     let doc = document.createElement("audio");
@@ -106,9 +107,13 @@ function loadAudio(resolve) {
     i = timer = setInterval(() => {
       let song = document.getElementById("s" + index);
       if (song.readyState === 4) {
-        progress.style.width = (100 / length) * index + "%";
-        if (i === length) {
-          setTimeout(() => res(), 4000);
+        counter[index] = 1;
+        // progress.style.width = (100 / length) * index + "%";
+        counter[i] = 1;
+        let sum = counter.reduce((a, b) => a + b);
+        if (sum === length) {
+          console.log(sum);
+          res();
         }
         clearInterval(timer);
         return i++;
