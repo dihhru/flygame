@@ -93,7 +93,6 @@ function loadAudio(resolve) {
   let progress = document.getElementById("progressBar");
   while (i < length) {
     let index = i;
-    progress.style.width = (100 / length) * index + "%";
     let sound = uniq[i];
     let doc = document.createElement("audio");
     doc.src = `sounds/${sound}.wav`;
@@ -102,6 +101,7 @@ function loadAudio(resolve) {
     i = timer = setInterval(() => {
       let song = document.getElementById("s" + index);
       if (song.readyState === 4) {
+        progress.style.width = (100 / length) * index + "%";
         if (i === length) {
           setTimeout(() => res(), 3000);
         }
