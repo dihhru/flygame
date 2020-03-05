@@ -406,7 +406,7 @@ function start() {
     plane.draw();
   }, 1000);
 }
-console.log("final V");
+console.log("final V2");
 let lastTime = 0;
 function gameLoop(timestamp) {
   setTimeout(function() {
