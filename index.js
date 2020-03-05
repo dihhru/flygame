@@ -110,7 +110,7 @@ function loadAudio(resolve) {
         clearInterval(timer);
         return i++;
       }
-    }, 100);
+    }, 500);
   }
 }
 
