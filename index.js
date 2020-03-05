@@ -276,12 +276,6 @@ class Game {
     ) {
       game.scores--;
       game.notesPositions[index][2] = 0;
-      uniq.map((sound, index) => {
-        let id = "s" + index;
-        let song = document.getElementById(id);
-        song.pause();
-        song.currentTime = 0;
-      });
       return true;
     } else {
       return false;
