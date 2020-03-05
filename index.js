@@ -290,7 +290,7 @@ class Game {
         return;
       }
       let nota = document.getElementById(note[3]);
-      let img = nota.cloneNode();
+      let img = nota;
       ctx.drawImage(img, note[0], note[1], 40, 75);
     });
   }
