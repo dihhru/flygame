@@ -269,7 +269,8 @@ class Game {
       game.scores--;
       game.notesPositions[index][2] = 0;
       uniq.map((sound, index) => {
-        let song = document.getElementById("s" + index);
+        let id = "s" + index;
+        let song = document.getElementById(id);
         song.pause();
         song.currentTime = 0;
       });
@@ -351,7 +352,8 @@ class Plane {
         if (n) {
           game.activeNote = index;
           let soundId = sounds[game.level][index];
-          let audio = document.getElementById("s" + index);
+          let id = uniq.indexOf(soundId);
+          let audio = document.getElementById("s" + id);
           audio.currentTime = 0;
           audio.play();
         }
