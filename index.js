@@ -82,6 +82,7 @@ const sounds = [
 let uniq;
 function loadAudio(resolve) {
   let files = JSON.parse(JSON.stringify(sounds));
+  let res = resolve;
   let arr = files.flat(Infinity);
   let bg = document.getElementById("res");
   uniq = Array.from(new Set(arr));
@@ -100,7 +101,7 @@ function loadAudio(resolve) {
       let song = document.getElementById("s" + index);
       if (song.readyState === 4) {
         if (i === length) {
-          resolve();
+          setTimeout(() => res(), 3000);
         }
         clearInterval(timer);
         return i++;
@@ -201,7 +202,7 @@ let authors = ["mozart", "beethoven", "bach", "brahms"];
 class Game {
   constructor() {
     this.scores = notesPositions.length;
-    this.isStarted = true;
+    this.isStarted = false;
     this.level = -1;
     this.notesPositions = null;
     this.activeNote = -1;
@@ -300,7 +301,7 @@ class Plane {
   constructor(speed) {
     this.image = "images/plane.png";
     this.speed = speed;
-    this.position = { x: -100, y: 150 };
+    this.position = { x: -100, y: 250 };
     this.size = 100;
     this.distance = 0;
   }
