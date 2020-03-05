@@ -108,7 +108,6 @@ function loadAudio(resolve) {
       let song = document.getElementById("s" + index);
       if (song.readyState === 4) {
         counter[index] = 1;
-        counter[i] = 1;
         let sum = counter.reduce((a, b) => a + b);
         progress.style.width = (100 / length) * sum + "%";
         console.log(sum);
@@ -280,8 +279,8 @@ class Game {
     ) {
       game.scores--;
       game.notesPositions[index][2] = 0;
-      uniq.map(x => {
-        let song = document.getElementById("s" + x);
+      uniq.map((x, index) => {
+        let song = document.getElementById("s" + index);
         song.currentTime = 0;
         song.pause();
       });
@@ -415,7 +414,7 @@ function start() {
     plane.draw();
   }, 1000);
 }
-console.log("cat");
+console.log("dog");
 let lastTime = 0;
 function gameLoop(timestamp) {
   setTimeout(function() {
