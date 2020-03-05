@@ -211,7 +211,7 @@ class Game {
     this.activeNote = -1;
   }
   speed() {
-    document.getElementById("range").value = 20 + 20 * this.level;
+    document.getElementById("range").value = 10 + 7 * this.level;
   }
   win() {
     let _this = this;
