@@ -300,7 +300,7 @@ class Plane {
   constructor(speed) {
     this.image = "images/plane.png";
     this.speed = speed;
-    this.position = { x: -100, y: 250 };
+    this.position = { x: -100, y: 150 };
     this.size = 100;
     this.distance = 0;
   }
