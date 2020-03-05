@@ -220,6 +220,7 @@ class Game {
     newPannel.className = "pannel";
     root.appendChild(newPannel);
     this.speed();
+    document.getElementById("s" + "5").oncanplay = () => console.log("load");
   }
   togglePause() {
     console.log(notesPositions);
@@ -258,7 +259,7 @@ class Game {
       let doc = document.createElement("audio");
       doc.src = `sounds/${sound}.wav`;
       doc.id = "s" + index;
-      doc.onload = () => console.log(sound);
+      doc.currentTime = 0;
       bg.appendChild(doc);
     });
   }
