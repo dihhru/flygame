@@ -280,6 +280,11 @@ class Game {
     ) {
       game.scores--;
       game.notesPositions[index][2] = 0;
+      uniq.map(x => {
+        let song = document.getElementById("s" + x);
+        song.currentTime = 0;
+        song.pause();
+      });
       return true;
     } else {
       return false;
@@ -358,10 +363,8 @@ class Plane {
         if (n) {
           game.activeNote = index;
           let soundId = sounds[game.level][index];
-          console.log(soundId);
           let id = uniq.indexOf(soundId);
           let audio = document.getElementById("s" + id);
-          console.log(audio);
           audio.currentTime = 0;
           audio.play();
         }
@@ -412,7 +415,7 @@ function start() {
     plane.draw();
   }, 1000);
 }
-console.log("ready");
+console.log("cat");
 let lastTime = 0;
 function gameLoop(timestamp) {
   setTimeout(function() {
@@ -420,5 +423,5 @@ function gameLoop(timestamp) {
     lastTime = timestamp;
     plane.update(deltaTime);
     requestAnimationFrame(gameLoop);
-  }, 25);
+  }, 15);
 }
