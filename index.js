@@ -100,13 +100,13 @@ function loadAudio(resolve) {
     bg.appendChild(doc);
     let timer;
     i = timer = setInterval(() => {
-      console.log(index);
       let song = document.getElementById("s" + index);
       if (song.readyState === 4) {
         progress.style.width = (100 / length) * index + "%";
         if (i === length) {
           setTimeout(() => res(), 4000);
         }
+        console.log(index);
         clearInterval(timer);
         return i++;
       }
