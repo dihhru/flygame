@@ -108,11 +108,10 @@ function loadAudio(resolve) {
       let song = document.getElementById("s" + index);
       if (song.readyState === 4) {
         counter[index] = 1;
-        // progress.style.width = (100 / length) * index + "%";
         counter[i] = 1;
         let sum = counter.reduce((a, b) => a + b);
+        progress.style.width = (100 / length) * sum + "%";
         if (sum === length) {
-          console.log(sum);
           res();
         }
         clearInterval(timer);
