@@ -106,7 +106,7 @@ function loadAudio(resolve) {
         if (i === length) {
           setTimeout(() => res(), 4000);
         }
-        console.log(index);
+
         clearInterval(timer);
         return i++;
       }
@@ -356,8 +356,10 @@ class Plane {
         if (n) {
           game.activeNote = index;
           let soundId = sounds[game.level][index];
+          console.log(soundId);
           let id = uniq.indexOf(soundId);
           let audio = document.getElementById("s" + id);
+          console.log(audio);
           audio.currentTime = 0;
           audio.play();
         }
@@ -400,7 +402,6 @@ promise.then(x => start());
 function start() {
   document.getElementById("loading").style.display = "none";
   document.getElementById("root").style.display = "flex";
-  game.levelUp();
   requestAnimationFrame(gameLoop);
   plane.draw();
   setTimeout(function() {
