@@ -204,7 +204,7 @@ let authors = ["mozart", "beethoven", "bach", "brahms"];
 class Game {
   constructor() {
     this.scores = notesPositions.length;
-    this.isStarted = false;
+    this.isStarted = true;
     this.level = -1;
     this.notesPositions = null;
     this.activeNote = -1;
@@ -300,7 +300,7 @@ class Plane {
   constructor(speed) {
     this.image = "images/plane.png";
     this.speed = speed;
-    this.position = { x: -100, y: 250 };
+    this.position = { x: -100, y: 150 };
     this.size = 100;
     this.distance = 0;
   }
