@@ -239,6 +239,11 @@ class Game {
     ) {
       game.scores--;
       game.notesPositions[index][2] = 0;
+      uniq.map((sound, index) => {
+        let song = document.getElementById("s" + index);
+        song.pause();
+        song.currentTime = 0;
+      });
       return true;
     } else {
       return false;
@@ -249,10 +254,11 @@ class Game {
     let arr = files.flat(Infinity);
     let bg = document.getElementById("res");
     uniq = Array.from(new Set(arr));
-    uniq.map(sound => {
+    uniq.map((sound, index) => {
       let doc = document.createElement("audio");
       doc.src = `sounds/${sound}.wav`;
-      doc.id = sound;
+      doc.id = "s" + index;
+      doc.onload = () => console.log(sound);
       bg.appendChild(doc);
     });
   }
@@ -328,8 +334,7 @@ class Plane {
         let n = game.detectCollision(plane, note, index);
         if (n) {
           game.activeNote = index;
-          let soundId = sounds[game.level][index];
-          let audio = document.getElementById(soundId);
+          let audio = document.getElementById("s" + index);
           audio.currentTime = 0;
           audio.play();
         }
