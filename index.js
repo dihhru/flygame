@@ -98,6 +98,7 @@ function loadAudio(resolve) {
     doc.src = `sounds/${sound}.wav`;
     doc.id = "s" + index;
     bg.appendChild(doc);
+    let timer;
     i = timer = setInterval(() => {
       let song = document.getElementById("s" + index);
       if (song.readyState === 4) {
