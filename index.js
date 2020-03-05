@@ -81,6 +81,7 @@ const sounds = [
 ];
 let uniq;
 function loadAudio(resolve) {
+  game.levelUp();
   let files = JSON.parse(JSON.stringify(sounds));
   let res = resolve;
   let arr = files.flat(Infinity);
@@ -251,7 +252,6 @@ class Game {
     newPannel.className = "pannel";
     root.appendChild(newPannel);
     this.speed();
-    document.getElementById("s" + "5").oncanplay = () => console.log("load");
   }
   togglePause() {
     console.log(notesPositions);
