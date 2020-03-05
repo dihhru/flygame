@@ -80,16 +80,14 @@ const sounds = [
   //Brahms
 ];
 let uniq;
-function loadAudio() {
+function loadAudio(resolve) {
   let files = JSON.parse(JSON.stringify(sounds));
   let arr = files.flat(Infinity);
   let bg = document.getElementById("res");
   uniq = Array.from(new Set(arr));
   let length = uniq.length;
   let i = 0;
-  console.log(uniq);
   while (i < length) {
-    console.log(i);
     let index = i;
     let sound = uniq[i];
     let doc = document.createElement("audio");
@@ -99,14 +97,19 @@ function loadAudio() {
     i = timer = setInterval(() => {
       let song = document.getElementById("s" + index);
       if (song.readyState === 4) {
+        if (i === length) {
+          resolve();
+        }
         clearInterval(timer);
         return i++;
       }
-    }, 1000);
+    }, 100);
   }
 }
-
-loadAudio();
+let promise = new Promise(function(resolve) {
+  loadAudio(resolve);
+});
+promise.then(x => console.log(1));
 
 let notesPositions = [
   [
