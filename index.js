@@ -85,9 +85,13 @@ function loadAudio(resolve) {
   plane.draw();
   let files = JSON.parse(JSON.stringify(sounds));
   let res = resolve;
+  console.log(files);
   let arr = files.flat(Infinity);
   let bg = document.getElementById("res");
-  uniq = Array.from(new Set(arr));
+  let set = new Set(arr);
+  console.log(set);
+  uniq = Array.from(set);
+
   let length = uniq.length;
   let i = 0;
   let progress = document.getElementById("progressBar");
