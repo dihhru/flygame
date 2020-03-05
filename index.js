@@ -201,7 +201,7 @@ let authors = ["mozart", "beethoven", "bach", "brahms"];
 class Game {
   constructor() {
     this.scores = notesPositions.length;
-    this.isStarted = false;
+    this.isStarted = true;
     this.level = -1;
     this.notesPositions = null;
     this.activeNote = -1;
