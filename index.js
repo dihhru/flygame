@@ -79,6 +79,35 @@ const sounds = [
   ]
   //Brahms
 ];
+let uniq;
+function loadAudio() {
+  let files = JSON.parse(JSON.stringify(sounds));
+  let arr = files.flat(Infinity);
+  let bg = document.getElementById("res");
+  uniq = Array.from(new Set(arr));
+  let length = uniq.length;
+  let i = 0;
+  console.log(uniq);
+  while (i < length) {
+    console.log(i);
+    let index = i;
+    let sound = uniq[i];
+    let doc = document.createElement("audio");
+    doc.src = `sounds/${sound}.wav`;
+    doc.id = "s" + index;
+    bg.appendChild(doc);
+    i = timer = setInterval(() => {
+      let song = document.getElementById("s" + index);
+      if (song.readyState === 4) {
+        clearInterval(timer);
+        return i++;
+      }
+    }, 1000);
+  }
+}
+
+loadAudio();
+
 let notesPositions = [
   [
     [130, 100, 1, 0],
@@ -167,7 +196,7 @@ let notesPositions = [
   ] //brahms
 ];
 let authors = ["mozart", "beethoven", "bach", "brahms"];
-let uniq;
+
 class Game {
   constructor() {
     this.scores = notesPositions.length;
@@ -250,19 +279,6 @@ class Game {
       return false;
     }
   }
-  createSounds() {
-    let files = JSON.parse(JSON.stringify(sounds));
-    let arr = files.flat(Infinity);
-    let bg = document.getElementById("res");
-    uniq = Array.from(new Set(arr));
-    uniq.map((sound, index) => {
-      let doc = document.createElement("audio");
-      doc.src = `sounds/${sound}.wav`;
-      doc.id = "s" + index;
-      doc.currentTime = 0;
-      bg.appendChild(doc);
-    });
-  }
   drawNotes() {
     var canvas = document.getElementById("bg");
     var ctx = canvas.getContext("2d");
@@ -335,6 +351,7 @@ class Plane {
         let n = game.detectCollision(plane, note, index);
         if (n) {
           game.activeNote = index;
+          let soundId = sounds[game.level][index];
           let audio = document.getElementById("s" + index);
           audio.currentTime = 0;
           audio.play();
@@ -366,9 +383,8 @@ class InputHandler {
     });
   }
 }
-console.log(18);
+
 let game = new Game();
-game.createSounds();
 let plane = new Plane(1);
 let input = new InputHandler(plane, game);
 
@@ -382,6 +398,7 @@ setTimeout(() => {
   }, 1000);
   document.getElementById("loading").style.display = "none";
 }, 20000);
+
 let lastTime = 0;
 function gameLoop(timestamp) {
   setTimeout(function() {
