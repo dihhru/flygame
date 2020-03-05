@@ -106,10 +106,6 @@ function loadAudio(resolve) {
     }, 100);
   }
 }
-let promise = new Promise(function(resolve) {
-  loadAudio(resolve);
-});
-promise.then(x => console.log(1));
 
 let notesPositions = [
   [
@@ -390,8 +386,13 @@ class InputHandler {
 let game = new Game();
 let plane = new Plane(1);
 let input = new InputHandler(plane, game);
+let promise = new Promise(function(resolve) {
+  loadAudio(resolve);
+});
+promise.then(x => start());
 
-setTimeout(() => {
+function start() {
+  document.getElementById("loading").style.display = "none";
   game.levelUp();
   requestAnimationFrame(gameLoop);
   game.drawNotes();
@@ -399,8 +400,7 @@ setTimeout(() => {
   setTimeout(function() {
     plane.draw();
   }, 1000);
-  document.getElementById("loading").style.display = "none";
-}, 20000);
+}
 
 let lastTime = 0;
 function gameLoop(timestamp) {
