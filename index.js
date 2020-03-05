@@ -82,6 +82,7 @@ const sounds = [
 let uniq;
 function loadAudio(resolve) {
   game.levelUp();
+  plane.draw();
   let files = JSON.parse(JSON.stringify(sounds));
   let res = resolve;
   let arr = files.flat(Infinity);
@@ -91,8 +92,8 @@ function loadAudio(resolve) {
   let i = 0;
   let progress = document.getElementById("progressBar");
   while (i < length) {
-    progress.style.width = (100 / length) * i + "%";
     let index = i;
+    progress.style.width = (100 / length) * index + "%";
     let sound = uniq[i];
     let doc = document.createElement("audio");
     doc.src = `sounds/${sound}.wav`;
@@ -240,8 +241,6 @@ class Game {
     game.notesPositions = JSON.parse(
       JSON.stringify(notesPositions[game.level])
     );
-    console.log(game);
-    console.log(this);
     game.scores = notesPositions[game.level].length;
     let root = document.getElementById("root");
     let pannel = document.getElementById("pannel");
@@ -401,7 +400,6 @@ function start() {
   document.getElementById("root").style.display = "flex";
   game.levelUp();
   requestAnimationFrame(gameLoop);
-  game.drawNotes();
   plane.draw();
   setTimeout(function() {
     plane.draw();
