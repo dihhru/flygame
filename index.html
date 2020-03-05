@@ -2,6 +2,12 @@
   <head>
     <title>Fly game</title>
     <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
   </head>
 
   <body>
@@ -43,22 +49,35 @@
       <img id="3" src="images/notes/3.png" width="150" />
     </div>
     <div class="bg">
-      <div
-        style="width:1200px; flex-direction:column; position:relative; display:flex; justify-content: center;"
+
+      <div id="loading" 
+        style="width:1200px; height:400px; flex-direction:column; position:relative; display:flex; justify-content: center;"
       >
-        <div id="loading" class="loading">
+        <div class="loading">
           <img src="images/loading.gif" width="50" height="50" />
         </div>
-        <div id="root" style="width:1200px; height: 400px">
-          <img id="pannel" class="pannel" />
-          <canvas
-            style="z-index:10000"
-            width="1200"
-            height="400"
-            id="bg"
-            class="bg"
+          <div 
+            id='progressBar'
+            class="progress-bar bg-success, bar"
+            role="progressbar"
+            style="width: 85%;"
+            aria-valuenow="85"
+            aria-valuemin="0"
+            aria-valuemax="100"
           >
-          </canvas>
+        </div>
+      </div>
+
+          <div id="root" style="width:1200px; height: 400px; flex-direction:column; position:relative; display:none; justify-content: center;">
+            <img id="pannel" class="pannel" />
+            <canvas
+              style="z-index:100"
+              width="1200"
+              height="400"
+            
+            >
+            </canvas>
+   
           <div>
             <input
               class="range"

@@ -87,7 +87,9 @@ function loadAudio(resolve) {
   uniq = Array.from(new Set(arr));
   let length = uniq.length;
   let i = 0;
+  let progress = document.getElementById("progressBar");
   while (i < length) {
+    progress.style.width = (100 / length) * i + "%";
     let index = i;
     let sound = uniq[i];
     let doc = document.createElement("audio");
@@ -103,7 +105,7 @@ function loadAudio(resolve) {
         clearInterval(timer);
         return i++;
       }
-    }, 100);
+    }, 10000);
   }
 }
 
@@ -395,6 +397,7 @@ promise.then(x => start());
 
 function start() {
   document.getElementById("loading").style.display = "none";
+  document.getElementById("root").style.display = "flex";
   game.levelUp();
   requestAnimationFrame(gameLoop);
   game.drawNotes();
