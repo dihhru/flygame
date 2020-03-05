@@ -87,7 +87,7 @@ function loadAudio(resolve) {
   let res = resolve;
   console.log(files);
   let arr = files.flat(Infinity);
-  let bg = document.getElementById("res");
+  let bg = document.getElementById("cords");
   let set = new Set(arr);
   console.log(set);
   uniq = Array.from(set);
@@ -110,7 +110,6 @@ function loadAudio(resolve) {
         if (i === length) {
           setTimeout(() => res(), 4000);
         }
-
         clearInterval(timer);
         return i++;
       }
@@ -210,7 +209,7 @@ let authors = ["mozart", "beethoven", "bach", "brahms"];
 class Game {
   constructor() {
     this.scores = notesPositions.length;
-    this.isStarted = true;
+    this.isStarted = false;
     this.level = -1;
     this.notesPositions = null;
     this.activeNote = -1;
@@ -393,14 +392,16 @@ let game = new Game();
 let plane = new Plane(1);
 let input = new InputHandler(plane, game);
 let promise = new Promise(function(resolve) {
+  requestAnimationFrame(gameLoop);
   loadAudio(resolve);
 });
 promise.then(x => start());
 
 function start() {
-  document.getElementById("loading").style.display = "none";
+  let app = document.getElementById("app");
+  let loading = document.getElementById("loading");
+  app.removeChild(loading);
   document.getElementById("root").style.display = "flex";
-  requestAnimationFrame(gameLoop);
   plane.draw();
   setTimeout(function() {
     plane.draw();
@@ -414,5 +415,5 @@ function gameLoop(timestamp) {
     lastTime = timestamp;
     plane.update(deltaTime);
     requestAnimationFrame(gameLoop);
-  }, 15);
+  }, 25);
 }
