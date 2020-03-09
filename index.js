@@ -6,16 +6,15 @@ let promise = new Promise(function(resolve) {
   loadAudio(resolve);
 });
 promise.then(x => start());
-
+var root = document.getElementById("root");
+var canvas = document.getElementById("canvas");
+let width = document.documentElement.clientWidth;
+let height = document.documentElement.clientHeight;
+root.style.width = width + "px";
+canvas.style.width = width + "px";
+root.style.height = height + "px";
+canvas.style.height = height + "px";
 function loadAudio(resolve) {
-  var root = document.getElementById("root");
-  var canvas = document.getElementById("canvas");
-  // let width = document.documentElement.clientWidth;
-  // let height = document.documentElement.clientHeight;
-  // root.style.width = width + "px";
-  // canvas.style.width = width + "px";
-  // root.style.height = height + "px";
-  //canvas.style.height = height + "px";
   game.buildLevel();
   plane.draw();
   let files = JSON.parse(JSON.stringify(sounds));
@@ -70,5 +69,5 @@ function gameLoop(timestamp) {
     lastTime = timestamp;
     plane.update(deltaTime);
     requestAnimationFrame(gameLoop);
-  }, 15);
+  }, 10);
 }

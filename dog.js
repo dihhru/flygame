@@ -80,7 +80,7 @@ class Game {
 class Plane {
   constructor(speed) {
     this.image = "images/plane.png";
-    this.speed = speed;
+    this.speed = 1;
     this.position = { x: 0, y: 150 };
     this.size = 100;
     this.distance = 0;
@@ -93,11 +93,12 @@ class Plane {
   }
   update() {
     let range = document.getElementById("range").value;
-    this.distance = 0.05 * range;
+    this.distance = 0.2 * range;
     if (game.isStarted === false) {
       return;
     }
     this.position.x += this.distance;
+    this.position.y += 0.5 * this.distance;
     if (this.position.x >= 1200) {
       game.isStarted = false;
       this.position.x = 0;
@@ -117,8 +118,7 @@ class Plane {
     audio.play();
   }
   draw() {
-    let width = document.documentElement.clientWidth;
-    let height = document.documentElement.clientHeight;
+    var canvas = document.getElementById("canvas");
     var ctx = canvas.getContext("2d");
     var image = document.getElementById("plane");
     let pannel = document.getElementById("pannel");
