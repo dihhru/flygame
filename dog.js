@@ -42,7 +42,7 @@ class Game {
     let root = document.getElementById("root");
     let pannel = document.getElementById("pannel");
     root.removeChild(pannel);
-    let oldPannel = document.getElementById("mozart_pannel");
+    let oldPannel = document.getElementById("brahms_pannel");
     let newPannel = oldPannel.cloneNode();
     newPannel.id = "pannel";
     newPannel.style.display = "none";
@@ -113,7 +113,7 @@ class Plane {
     var image = document.getElementById("plane");
     let pannel = document.getElementById("pannel");
     let y = this.position.y;
-    ctx.drawImage(pannel, 0, 0, 3600, 858);
+    ctx.drawImage(pannel, 0, -160, 3600, 860);
     ctx.setTransform(1, 0, 0, 1, 0, 0); //reset the transform matrix as it is cumulative
     ctx.translate(-this.position.x, 0);
     ctx.drawImage(image, this.position.x + 10, this.position.y, 100, 100);
