@@ -1,11 +1,3 @@
-let game = new Game();
-let plane = new Plane(1);
-let input = new InputHandler(plane, game);
-let promise = new Promise(function(resolve) {
-  requestAnimationFrame(gameLoop);
-  loadAudio(resolve);
-});
-promise.then(x => start());
 var root = document.getElementById("root");
 var canvas = document.getElementById("canvas");
 let width = document.documentElement.clientWidth;
@@ -14,6 +6,27 @@ root.style.width = width + "px";
 canvas.style.width = width + "px";
 root.style.height = height + "px";
 canvas.style.height = height + "px";
+if (width < height) {
+  height = height / 2;
+}
+let n = 2.5;
+for (let i = 0; i < notesPositions.length; i++) {
+  notesPositions[i] = notesPositions[i].map(function(x) {
+    x[0] = x[0] * n;
+    x[1] = x[1] * 2s;
+    return x;
+  });
+}
+let game = new Game();
+let plane = new Plane(1);
+let input = new InputHandler(plane, game);
+let promise = new Promise(function(resolve) {
+  requestAnimationFrame(gameLoop);
+  loadAudio(resolve);
+});
+promise.then(x => start());
+
+console.log(notesPositions);
 function loadAudio(resolve) {
   game.buildLevel();
   plane.draw();
