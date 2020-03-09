@@ -2,7 +2,7 @@ class Game {
   constructor() {
     this.scores = notesPositions.length;
     this.isStarted = false;
-    this.level = 0;
+    this.level = 2;
     this.notesPositions = null;
     this.activeNote = -1;
   }
@@ -99,18 +99,8 @@ class Plane {
     }
     this.position.x += this.distance;
     this.position.y += 0.5 * this.distance;
-    if (this.position.x >= 1200) {
-      game.isStarted = false;
-      this.position.x = 0;
-      if (game.scores > 3) {
-        game.isStarted = true;
-        game.activeNote = -1;
-        return;
-      }
-      game.win();
-    } else {
-      this.draw();
-    }
+
+    this.draw();
   }
   crash() {
     let audio = document.createElement("audio");
@@ -123,10 +113,10 @@ class Plane {
     var image = document.getElementById("plane");
     let pannel = document.getElementById("pannel");
     let y = this.position.y;
-    ctx.drawImage(pannel, 0, 0, 3200, 700);
+    ctx.drawImage(pannel, 0, 0, 3600, 858);
     ctx.setTransform(1, 0, 0, 1, 0, 0); //reset the transform matrix as it is cumulative
     ctx.translate(-this.position.x, 0);
-    ctx.drawImage(image, this.position.x + 100, this.position.y, 100, 100);
+    ctx.drawImage(image, this.position.x + 10, this.position.y, 100, 100);
     game.drawNotes();
     let planeX = this.position.x + 200;
     let planeY = this.position.y;

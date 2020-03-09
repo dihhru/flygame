@@ -2,18 +2,20 @@ var root = document.getElementById("root");
 var canvas = document.getElementById("canvas");
 let width = document.documentElement.clientWidth;
 let height = document.documentElement.clientHeight;
+let n;
+n = width / height;
+if (width < height) {
+  height = height / 2;
+  n = 2;
+}
 root.style.width = width + "px";
 canvas.style.width = width + "px";
 root.style.height = height + "px";
 canvas.style.height = height + "px";
-if (width < height) {
-  height = height / 2;
-}
-let n = 2.5;
 for (let i = 0; i < notesPositions.length; i++) {
   notesPositions[i] = notesPositions[i].map(function(x) {
     x[0] = x[0] * n;
-    x[1] = x[1] * 2s;
+    x[1] = x[1] * 2;
     return x;
   });
 }
