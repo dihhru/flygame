@@ -55,34 +55,17 @@ class Game {
     console.log(notesPositions);
     plane.speed = 0;
   }
-  detectCollision(plane, note, index) {
-    let bottomOfplane = plane.position.y + plane.size;
-    let topOfplane = plane.position.y;
-    let topOfObject = note[1];
-    let bottomOfObject = note[1] + 110;
-    let leftSideOfObject = note[0];
-    if (
-      bottomOfplane >= topOfObject &&
-      topOfplane <= bottomOfObject &&
-      plane.position.x + 50 >= leftSideOfObject &&
-      note[2] !== 0
-    ) {
-      game.scores--;
-      game.notesPositions[index][2] = 0;
-      uniq.map((x, index) => {
-        let song = document.getElementById("s" + index);
-        song.currentTime = 0;
-        song.pause();
-      });
+  detectCollision(planeX, planeY, note, index) {
+    let posX = planeX >= note[0] - 50 && planeX <= note[0] + 50;
+    let posY = planeY >= note[1] - 50 && planeY <= note[1] + 50;
+    if (posX && posY) {
       return true;
-    } else {
-      return false;
     }
+    return false;
   }
   drawNotes() {
     var canvas = document.getElementById("canvas");
     var ctx = canvas.getContext("2d");
-
     game.notesPositions.map(function(note) {
       if (note[2] === 0) {
         return;
@@ -145,17 +128,12 @@ class Plane {
     ctx.translate(-this.position.x, 0);
     ctx.drawImage(image, this.position.x + 100, this.position.y, 100, 100);
     game.drawNotes();
+    let planeX = this.position.x + 200;
+    let planeY = this.position.y;
     game.notesPositions.map((note, index) => {
-      if (game.activeNote !== index && index >= game.activeNote) {
-        let n = game.detectCollision(plane, note, index);
-        if (n) {
-          game.activeNote = index;
-          let soundId = sounds[game.level][index];
-          let id = uniq.indexOf(soundId);
-          let audio = document.getElementById("s" + id);
-          audio.currentTime = 0;
-          audio.play();
-        }
+      let n = game.detectCollision(planeX, planeY, note, index);
+      if (n) {
+        game.notesPositions[index][2] = 0;
       }
     });
   }

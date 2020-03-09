@@ -5,7 +5,6 @@ let promise = new Promise(function(resolve) {
   requestAnimationFrame(gameLoop);
   loadAudio(resolve);
 });
-let unqi;
 promise.then(x => start());
 
 function loadAudio(resolve) {
