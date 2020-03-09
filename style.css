@@ -58,9 +58,9 @@
 .pannel {
   top: 0px;
   z-index: -1;
-  width: 1200px;
+  width: 3000px;
+  overflow: hidden;
   height: 378px;
-  position: absolute;
 }
 .bar {
   height: 15px;

@@ -5,9 +5,18 @@ let promise = new Promise(function(resolve) {
   requestAnimationFrame(gameLoop);
   loadAudio(resolve);
 });
+let unqi;
 promise.then(x => start());
 
 function loadAudio(resolve) {
+  var root = document.getElementById("root");
+  var canvas = document.getElementById("canvas");
+  // let width = document.documentElement.clientWidth;
+  // let height = document.documentElement.clientHeight;
+  // root.style.width = width + "px";
+  // canvas.style.width = width + "px";
+  // root.style.height = height + "px";
+  //canvas.style.height = height + "px";
   game.buildLevel();
   plane.draw();
   let files = JSON.parse(JSON.stringify(sounds));

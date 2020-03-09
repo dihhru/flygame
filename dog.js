@@ -42,9 +42,11 @@ class Game {
     let root = document.getElementById("root");
     let pannel = document.getElementById("pannel");
     root.removeChild(pannel);
-    let oldPannel = document.getElementById(authors[this.level] + "_pannel");
+    let oldPannel = document.getElementById("mozart_pannel");
     let newPannel = oldPannel.cloneNode();
     newPannel.id = "pannel";
+    newPannel.style.display = "none";
+    newPannel.style.width = "3600px";
     newPannel.className = "pannel";
     root.appendChild(newPannel);
     this.speed();
@@ -80,7 +82,7 @@ class Game {
   drawNotes() {
     var canvas = document.getElementById("canvas");
     var ctx = canvas.getContext("2d");
-    ctx.clearRect(0, 0, 1200, 400);
+
     game.notesPositions.map(function(note) {
       if (note[2] === 0) {
         return;
@@ -96,7 +98,7 @@ class Plane {
   constructor(speed) {
     this.image = "images/plane.png";
     this.speed = speed;
-    this.position = { x: -100, y: 150 };
+    this.position = { x: 0, y: 150 };
     this.size = 100;
     this.distance = 0;
   }
@@ -132,18 +134,17 @@ class Plane {
     audio.play();
   }
   draw() {
-    var canvas = document.getElementById("canvas");
+    let width = document.documentElement.clientWidth;
+    let height = document.documentElement.clientHeight;
     var ctx = canvas.getContext("2d");
     var image = document.getElementById("plane");
+    let pannel = document.getElementById("pannel");
     let y = this.position.y;
-    if (y >= 285 || y <= -45) {
-      this.crash();
-      this.position.y = 250;
-      this.position.x = -100;
-    }
-    ctx.clearRect(0, 0, 1200, 400);
+    ctx.drawImage(pannel, 0, 0, 3200, 700);
+    ctx.setTransform(1, 0, 0, 1, 0, 0); //reset the transform matrix as it is cumulative
+    ctx.translate(-this.position.x, 0);
+    ctx.drawImage(image, this.position.x + 100, this.position.y, 100, 100);
     game.drawNotes();
-    ctx.drawImage(image, this.position.x, this.position.y, 100, 100);
     game.notesPositions.map((note, index) => {
       if (game.activeNote !== index && index >= game.activeNote) {
         let n = game.detectCollision(plane, note, index);
