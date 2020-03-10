@@ -56,6 +56,7 @@ function loadAudio(resolve) {
   }
 }
 function start() {
+  game.isStarted = true;
   game.buildLevel();
   plane.draw();
   let app = document.getElementById("app");

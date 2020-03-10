@@ -11,7 +11,7 @@ class Plane {
   }
   update() {
     let range = document.getElementById("range").value;
-    this.distance = 1 * range;
+    this.distance = 0.2 * range;
     if (game.isStarted === false) {
       return;
     }
