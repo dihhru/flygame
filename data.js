@@ -168,3 +168,8 @@ const notesPositions = [
     [1110, 160, 1, 3]
   ] //brahms
 ];
+let files = JSON.parse(JSON.stringify(sounds));
+let arr = files.flat(Infinity);
+let set = new Set(arr);
+const uniq = Array.from(set);
+console.log(uniq);

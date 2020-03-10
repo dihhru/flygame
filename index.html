@@ -13,18 +13,13 @@
   <body>
     <div id="cords"></div>
     <div id="res" style="display:none;">
-      <img id="plane" src="images/plane.png" width="104" height="74" />
+      <img id="plane" src="images/plane.png"  width="200" height="300" />
       <img id="mozart" src="images/mozart.gif" width="200" height="300" />
-      <img
-        id="mozart_pannel"
-        src="images/pannels/mozart_pannel.png"
-        width="1200"
-        height="378"
-      />
-      <img id="bach" src="images/bach.gif" width="104" height="74" />
-      <img id="beethoven" src="images/beethoven.gif" width="104" height="74" />
-      <img id="brahms" src="images/brahms.gif" width="104" height="74" />
-      <img id="plane" src="images/plane.png" width="104" height="74" />
+      <img id="bach" src="images/bach.gif"  width="200" height="300"/>
+      <img id="beethoven" src="images/beethoven.gif"  width="200" height="300"/>
+      <img id="brahms" src="images/brahms.gif"  width="200" height="300" />
+      <img id="plane" src="images/plane.png"  width="200" height="300" />
+            <img width="3000" id="mozart_pannel" src="images/pannels/mozart_pannel.png" />
       <img
         id="bach_pannel"
         src="images/pannels/bach_pannel.png"
@@ -49,34 +44,25 @@
       <img id="3" src="images/notes/3.png" width="150" />
     </div>
     <div id='app' class="bg">
-      <div id="loading" 
-        style="width:1200px; height:400px; flex-direction:column; position:relative; display:flex; justify-content: center;"
-      >
-        <div class="loading">
+      <div>
+        <div id="loading"  class="loading">
           <img src="images/loading.gif" width="50" height="50" />
-        </div>
-          <div 
-            id='progressBar'
-            class="progress-bar bg-success, bar"
-            role="progressbar"
-            style="width: 0%;"
-            aria-valuemin="0"
-            aria-valuemax="100"
-          >
+                    <div id='progressBar' class="progress-bar bg-success, bar" role="progressbar" style="width: 0%;" aria-valuemin="0"
+                      aria-valuemax="100">
+                    </div>
         </div>
       </div>
-
-          <div id="root" style="width:1200px; height: 400px; flex-direction:column; position:relative; display:none; justify-content: center;">
+          <div id="root" style="width:1200px; height: 700px; flex-direction:column; position:relative; display:none; justify-content: center;">
             <img id="pannel" class="pannel" />
             <canvas
               style="z-index:100"
               width="1200"
-              height="400"
+              height="700"
               id='canvas'
             >
             </canvas>
    
-          <div>
+          <div style="display: none;">
             <input
               class="range"
               id="range"
@@ -98,8 +84,11 @@
         </div>
       </div>
     </div>
-    <script type="text/javascript" src="cat.js"></script>
-    <script type="text/javascript" src="dog.js"></script>
-    <script defer type="text/javascript" src="index.js"></script>
+    <script type="text/javascript" src="data.js"></script>
+    <script type="text/javascript" src="plane.js"></script>
+    <script type="text/javascript" src="game.js"></script>
+    <script type="text/javascript" src="inputs.js"></script>
+    <script type="text/javascript" src="functions.js"></script>
+    <script type="text/javascript" src="index.js"></script>
   </body>
 </html>
