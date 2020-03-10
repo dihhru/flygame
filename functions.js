@@ -1,6 +1,7 @@
 function sreenSize() {
-  var root = document.getElementById("root");
-  var canvas = document.getElementById("canvas");
+  let root = document.getElementById("root");
+  let canvas = document.getElementById("canvas");
+  let loading = document.getElementById("loading");
   let width = document.documentElement.clientWidth;
   let height = document.documentElement.clientHeight;
   let n;
@@ -9,6 +10,8 @@ function sreenSize() {
     height = height / 2;
     n = 2;
   }
+  loading.style.width = width + "px";
+  loading.style.height = height + "px";
   root.style.width = width + "px";
   canvas.style.width = width + "px";
   root.style.height = height + "px";
@@ -57,7 +60,7 @@ function start() {
   plane.draw();
   let app = document.getElementById("app");
   let loading = document.getElementById("loading");
-  app.removeChild(loading);
+  loading.style.display = "none";
   document.getElementById("root").style.display = "flex";
   plane.draw();
   setTimeout(function() {
