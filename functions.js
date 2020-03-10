@@ -4,7 +4,7 @@ function sreenSize() {
   let width = document.documentElement.clientWidth;
   let height = document.documentElement.clientHeight;
   let n;
-  n = 2.3;
+  n = 2.2;
   if (width < height) {
     height = height / 2;
     n = 2;
@@ -22,14 +22,8 @@ function sreenSize() {
   }
 }
 function loadAudio(resolve) {
-  game.buildLevel();
-  plane.draw();
-  let files = JSON.parse(JSON.stringify(sounds));
   let res = resolve;
-  let arr = files.flat(Infinity);
   let bg = document.getElementById("cords");
-  let set = new Set(arr);
-  uniq = Array.from(set);
   let counter = [];
   let length = uniq.length;
   let i = 0;
@@ -59,6 +53,8 @@ function loadAudio(resolve) {
   }
 }
 function start() {
+  game.buildLevel();
+  plane.draw();
   let app = document.getElementById("app");
   let loading = document.getElementById("loading");
   app.removeChild(loading);

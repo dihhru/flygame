@@ -68,3 +68,22 @@
   position: absolute;
   bottom: -24px;
 }
+.author {
+  width: 200px;
+  height: 300px;
+  bottom: 0px;
+  -webkit-transition: 2s ease-in-out;
+  -moz-transition: 2s ease-in-out;
+  -o-transition: 2s ease-in-out;
+  transition: 2s ease-in-out;
+  position: absolute;
+  z-index: 100;
+  left: calc(50% - 100px);
+}
+.authorA {
+  -webkit-transform: translate(0, -25vh);
+  -moz-transform: translate(0, -25vh);
+  -o-transform: translate(0, -25vh);
+  -ms-transform: translate(0, -25vh);
+  transform: scale(1.5) translate(0, -25vh);
+}

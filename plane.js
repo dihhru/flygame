@@ -2,23 +2,21 @@ class Plane {
   constructor(speed) {
     this.image = "images/plane.png";
     this.speed = 1;
-    this.position = { x: 0, y: 150 };
+    this.position = { x: 0, y: 300 };
     this.size = 100;
     this.distance = 0;
   }
   moveY(x) {
     x === "-" ? (this.position.y += 15) : (this.position.y -= 15);
   }
-
   update() {
     let range = document.getElementById("range").value;
-    this.distance = 0.2 * range;
+    this.distance = 1 * range;
     if (game.isStarted === false) {
       return;
     }
     this.position.x += this.distance;
-    this.position.y += 0.5 * this.distance;
-
+    //this.position.y += 0.2 * this.distance;
     this.draw();
   }
   crash() {
@@ -37,13 +35,36 @@ class Plane {
     ctx.translate(-this.position.x, 0);
     ctx.drawImage(image, this.position.x + 10, this.position.y, 100, 100);
     game.drawNotes();
-    let planeX = this.position.x + 200;
+    let planeX = this.position.x + 50;
     let planeY = this.position.y;
+    if (planeY < 0 || planeY > 600) {
+      this.crash();
+      this.position.y = 300;
+    }
     game.notesPositions.map((note, index) => {
+      if (game.notesPositions[index][2] === 0) {
+        return;
+      }
       let n = game.detectCollision(planeX, planeY, note, index);
       if (n) {
+        let sound = sounds[game.level][index];
+        let id = uniq.indexOf(sound);
+        console.log(game.activeNote);
+        document.getElementById("s" + game.activeNote).pause();
+        document.getElementById("s" + game.activeNote).currentTime = 0;
+        document.getElementById("s" + id).play();
         game.notesPositions[index][2] = 0;
+        game.scores--;
+        game.activeNote = id;
       }
     });
+    let last = [...game.notesPositions].pop();
+    if (this.position.x > last[0]) {
+      this.position.x = 0;
+      if (game.scores < 3) {
+        game.isStarted = false;
+        game.win();
+      }
+    }
   }
 }
