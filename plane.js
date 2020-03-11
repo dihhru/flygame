@@ -49,7 +49,6 @@ class Plane {
       if (n) {
         let sound = sounds[game.level][index];
         let id = uniq.indexOf(sound);
-        console.log(game.activeNote);
         document.getElementById("s" + game.activeNote).pause();
         document.getElementById("s" + game.activeNote).currentTime = 0;
         document.getElementById("s" + id).play();

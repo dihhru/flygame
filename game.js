@@ -18,7 +18,7 @@ class Game {
     clone.onload = () => clone.classList.add("authorA");
     setTimeout(() => {
       root.removeChild(clone);
-      document.getElementById("loading").style.display = "none";
+      document.getElementById("loading").style.display = "";
       game.buildLevel();
     }, 3500);
   }
