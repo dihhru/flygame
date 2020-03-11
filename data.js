@@ -172,4 +172,3 @@ let files = JSON.parse(JSON.stringify(sounds));
 let arr = files.flat(Infinity);
 let set = new Set(arr);
 const uniq = Array.from(set);
-console.log(uniq);

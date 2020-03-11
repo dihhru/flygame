@@ -40,12 +40,13 @@ function loadAudio(resolve) {
     doc.id = "s" + index;
     bg.appendChild(doc);
     let timer;
+    let can = document.getElementById("canvas");
+    can.onload = () => console.log("1");
     i = timer = setInterval(() => {
       let song = document.getElementById("s" + index);
       if (song.readyState === 4) {
-        let pannel = document.getElementById("mozart_pannel");
-        console.log(pannel.readyState);
         counter[index] = 1;
+        console.log(song.readyState);
         let sum = counter.reduce((a, b) => a + b);
         progress.style.width = (100 / length) * sum + "%";
         if (sum === length) {
@@ -61,11 +62,9 @@ function start() {
   game.isStarted = true;
   game.buildLevel();
   plane.draw();
-  let app = document.getElementById("app");
   let loading = document.getElementById("loading");
   loading.style.display = "none";
   document.getElementById("root").style.display = "flex";
-  plane.draw();
   setTimeout(function() {
     plane.draw();
   }, 1000);
