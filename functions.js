@@ -43,6 +43,8 @@ function loadAudio(resolve) {
     i = timer = setInterval(() => {
       let song = document.getElementById("s" + index);
       if (song.readyState === 4) {
+        let pannel = document.getElementById("mozart_pannel");
+        console.log(pannel.readyState);
         counter[index] = 1;
         let sum = counter.reduce((a, b) => a + b);
         progress.style.width = (100 / length) * sum + "%";
