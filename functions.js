@@ -61,7 +61,7 @@ function start() {
   plane.draw();
   let app = document.getElementById("app");
   let loading = document.getElementById("loading");
-  loading.style.display = "none";
+
   document.getElementById("root").style.display = "flex";
   plane.draw();
   setTimeout(function() {
