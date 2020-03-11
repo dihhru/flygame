@@ -38,6 +38,7 @@ class Game {
     root.removeChild(pannel);
     let oldPannel = document.getElementById(`${authors[game.level]}_pannel`);
     let newPannel = oldPannel.cloneNode();
+    newPannel.onload = () => console.log(1);
     newPannel.id = "pannel";
     newPannel.style.display = "none";
     newPannel.style.width = "3600px";

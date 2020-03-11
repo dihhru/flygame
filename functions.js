@@ -40,13 +40,10 @@ function loadAudio(resolve) {
     doc.id = "s" + index;
     bg.appendChild(doc);
     let timer;
-    let can = document.getElementById("canvas");
-    can.onload = () => console.log("1");
     i = timer = setInterval(() => {
       let song = document.getElementById("s" + index);
       if (song.readyState === 4) {
         counter[index] = 1;
-        console.log(song.readyState);
         let sum = counter.reduce((a, b) => a + b);
         progress.style.width = (100 / length) * sum + "%";
         if (sum === length) {

@@ -1,6 +1,6 @@
 sreenSize();
 let can = document.getElementById("canvas");
-can.onload = () => console.log("1");
+can.onloadeddata = () => console.log("1");
 let game = new Game();
 let plane = new Plane(1);
 let input = new InputHandler(plane, game);
