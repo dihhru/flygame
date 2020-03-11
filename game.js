@@ -6,8 +6,10 @@ class Game {
     this.notesPositions = null;
     this.activeNote = 0;
   }
-  speed() {
-    document.getElementById("range").value = 10 + 7 * this.level;
+  restart() {
+    this.level--;
+    this.buildLevel();
+    plane.position.x = 0;
   }
   win() {
     let img = document.getElementById(authors[game.level]);
@@ -48,7 +50,6 @@ class Game {
       document.getElementById("loading").style.display = "none";
     };
     root.appendChild(newPannel);
-    this.speed();
   }
   togglePause() {
     console.log(notesPositions);
