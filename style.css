@@ -2,6 +2,7 @@
   background-size: contain;
   background-repeat: no-repeat;
   display: flex;
+  align-items: center;
   justify-content: center;
 }
 #notes1 {
@@ -90,4 +91,7 @@
   -o-transform: translate(0, -25vh);
   -ms-transform: translate(0, -25vh);
   transform: scale(1.5) translate(0, -25vh);
+}
+body {
+  display: flex;
 }
