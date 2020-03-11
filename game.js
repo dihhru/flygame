@@ -15,7 +15,7 @@ class Game {
     let root = document.getElementById("root");
     clone.className = "author";
     root.appendChild(clone);
-    setTimeout(() => clone.classList.add("authorA"), 100);
+    clone.onload = () => clone.classList.add("authorA");
     setTimeout(() => {
       root.removeChild(clone);
       game.buildLevel();
