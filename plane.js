@@ -1,7 +1,7 @@
 class Plane {
   constructor(speed) {
     this.image = "images/plane.png";
-    this.speed = 1;
+    this.speed = speed;
     this.position = { x: 0, y: 300 };
     this.size = 100;
     this.distance = 0;
@@ -10,8 +10,7 @@ class Plane {
     x === "-" ? (this.position.y += 15) : (this.position.y -= 15);
   }
   update() {
-    let range = document.getElementById("range").value;
-    this.distance = 0.2 * range;
+    this.distance = 2 * this.speed;
     if (game.isStarted === false) {
       return;
     }
@@ -33,7 +32,7 @@ class Plane {
     ctx.drawImage(pannel, 0, -160, 3600, 860);
     ctx.setTransform(1, 0, 0, 1, 0, 0); //reset the transform matrix as it is cumulative
     ctx.translate(-this.position.x, 0);
-    ctx.drawImage(image, this.position.x + 10, this.position.y, 100, 100);
+    ctx.drawImage(image, this.position.x + 50, this.position.y, 100, 100);
     game.drawNotes();
     let planeX = this.position.x + 50;
     let planeY = this.position.y;
