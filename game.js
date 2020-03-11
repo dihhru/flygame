@@ -18,9 +18,9 @@ class Game {
     clone.onload = () => clone.classList.add("authorA");
     setTimeout(() => {
       root.removeChild(clone);
+      document.getElementById("loading").style.display = "none";
       game.buildLevel();
-      game.isStarted = true;
-    }, 2500);
+    }, 3500);
   }
   buildLevel() {
     game.notesPositions = null;
@@ -43,6 +43,10 @@ class Game {
     newPannel.style.display = "none";
     newPannel.style.width = "3600px";
     newPannel.className = "pannel";
+    newPannel.onload = () => {
+      game.isStarted = true;
+      document.getElementById("loading").style.display = "none";
+    };
     root.appendChild(newPannel);
     this.speed();
   }
