@@ -59,8 +59,6 @@ function start() {
   game.isStarted = true;
   game.buildLevel();
   plane.draw();
-  let loading = document.getElementById("loading");
-  loading.style.display = "none";
   document.getElementById("root").style.display = "flex";
   setTimeout(function() {
     plane.draw();

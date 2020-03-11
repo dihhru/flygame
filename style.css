@@ -86,11 +86,11 @@
   left: calc(50% - 100px);
 }
 .authorA {
-  -webkit-transform: translate(0, -25vh);
-  -moz-transform: translate(0, -25vh);
-  -o-transform: translate(0, -25vh);
-  -ms-transform: translate(0, -25vh);
-  transform: scale(1.5) translate(0, -25vh);
+  -webkit-transform: translate(0, -3rem);
+  -moz-transform: translate(0, -3em);
+  -o-transform: translate(0, -3em);
+  -ms-transform: translate(0, -3em);
+  transform: scale(1.5) translate(0, -3em);
 }
 body {
   display: flex;
