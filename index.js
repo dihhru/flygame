@@ -11,5 +11,5 @@ let promise = new Promise(function(resolve) {
   requestAnimationFrame(gameLoop);
   loadAudio(resolve);
 });
-
+console.log("ready");
 promise.then(x => start());
