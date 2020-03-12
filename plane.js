@@ -15,6 +15,7 @@ class Plane {
       return;
     }
     this.position.x += this.distance;
+    this.position.y += 0.15 * this.distance;
     //this.position.y += 0.2 * this.distance;
     this.draw();
   }
