@@ -25,6 +25,7 @@ class Game {
     }, 3500);
   }
   buildLevel() {
+    game.isStarted = true;
     game.notesPositions = null;
     game.activeNote = 0;
     this.level++;
