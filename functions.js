@@ -57,7 +57,6 @@ function loadAudio(resolve) {
   }
 }
 function start() {
-  game.isStarted = true;
   game.buildLevel();
   plane.draw();
   document.getElementById("root").style.display = "flex";
