@@ -47,9 +47,9 @@ class Game {
     newPannel.className = "pannel";
     newPannel.onload = () => {
       document.getElementById("loading").style.display = "none";
+      game.isStarted = true;
     };
     root.appendChild(newPannel);
-    game.isStarted = true;
   }
   togglePause() {
     this.isStarted = true;
