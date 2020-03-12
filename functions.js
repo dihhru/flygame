@@ -36,6 +36,7 @@ function loadAudio(resolve) {
     let index = i;
     let sound = uniq[i];
     let doc = document.createElement("audio");
+    doc.preload = "auto";
     doc.src = `sounds/${sound}.wav`;
     doc.id = "s" + index;
     bg.appendChild(doc);
