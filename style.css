@@ -76,21 +76,21 @@
 .author {
   width: 200px;
   height: 300px;
-  bottom: 0px;
   -webkit-transition: 2s ease-in-out;
   -moz-transition: 2s ease-in-out;
   -o-transition: 2s ease-in-out;
   transition: 2s ease-in-out;
   position: absolute;
   z-index: 100;
+  top: calc(50%-150px);
   left: calc(50% - 100px);
 }
 .authorA {
-  -webkit-transform: translate(0, -3rem);
+  -webkit-transform: scale(1.2);
   -moz-transform: translate(0, -3em);
   -o-transform: translate(0, -3em);
   -ms-transform: translate(0, -3em);
-  transform: scale(1.5) translate(0, -3em);
+  transform: scale(1.1);
 }
 body {
   display: flex;

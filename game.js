@@ -2,7 +2,7 @@ class Game {
   constructor() {
     this.scores = notesPositions.length;
     this.isStarted = false;
-    this.level = -1;
+    this.level = 2;
     this.notesPositions = null;
     this.activeNote = 0;
   }
@@ -17,7 +17,7 @@ class Game {
     let root = document.getElementById("root");
     clone.className = "author";
     root.appendChild(clone);
-    clone.onload = () => clone.classList.add("authorA");
+    setTimeout(() => clone.classList.add("authorA"), 200);
     setTimeout(() => {
       root.removeChild(clone);
       document.getElementById("loading").style.display = "";
@@ -57,7 +57,7 @@ class Game {
   }
   detectCollision(planeX, planeY, note, index) {
     let posX = planeX >= note[0] - 100 && planeX <= note[0] + 50;
-    let posY = planeY >= note[1] - 50 && planeY <= note[1] + 50;
+    let posY = planeY >= note[1] - 75 && planeY <= note[1] + 75;
     if (posX && posY) {
       return true;
     }
