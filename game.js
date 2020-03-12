@@ -25,7 +25,6 @@ class Game {
     }, 3500);
   }
   buildLevel() {
-    game.isStarted = true;
     game.notesPositions = null;
     game.activeNote = 0;
     this.level++;
@@ -50,6 +49,7 @@ class Game {
       document.getElementById("loading").style.display = "none";
     };
     root.appendChild(newPannel);
+    game.isStarted = true;
   }
   togglePause() {
     this.isStarted = true;
