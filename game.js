@@ -46,13 +46,12 @@ class Game {
     newPannel.style.width = "3600px";
     newPannel.className = "pannel";
     newPannel.onload = () => {
-      game.isStarted = true;
       document.getElementById("loading").style.display = "none";
     };
     root.appendChild(newPannel);
   }
   togglePause() {
-    console.log(notesPositions);
+    this.isStarted = true;
     plane.speed = 0;
   }
   detectCollision(planeX, planeY, note, index) {
