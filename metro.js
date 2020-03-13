@@ -3,10 +3,10 @@ class Metro {
     this.speed = 0;
   }
   create(plane) {
-    let root = document.getElementById("root");
+    let root = document.getElementById("tools");
     let metro = document.createElement("img");
     let _this = this;
-    metro.className = "metro";
+    metro.className = "button1";
     metro.id = "metro";
     metro.src = `images/speed${this.speed}.png`;
     metro.ontouchstart = e => {
@@ -15,6 +15,7 @@ class Metro {
     metro.onclick = function() {
       _this.setSpeed(plane);
     };
+    metro.onmouseleave = e => e.preventDefault();
     root.appendChild(metro);
     this.setSpeed(plane);
   }

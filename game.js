@@ -55,11 +55,16 @@ class Game {
     this.isStarted = true;
     plane.speed = 0;
   }
+  test() {
+    return true;
+  }
   detectCollision(planeX, planeY, note, index) {
-    let posX = planeX >= note[0] - 100 && planeX <= note[0] + 50;
-    let posY = planeY >= note[1] - 75 && planeY <= note[1] + 75;
-    if (posX && posY) {
-      return true;
+    if (Array.isArray(note)) {
+      let posX = planeX >= note[0] - 100 && planeX <= note[0] + 50;
+      let posY = planeY >= note[1] - 75 && planeY <= note[1] + 75;
+      if (posX && posY) {
+        return true;
+      }
     }
     return false;
   }

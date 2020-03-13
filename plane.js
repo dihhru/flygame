@@ -63,6 +63,8 @@ class Plane {
       if (game.scores < 3) {
         game.isStarted = false;
         game.win();
+      } else {
+        game.restart();
       }
     }
   }
