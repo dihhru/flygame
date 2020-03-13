@@ -86,6 +86,7 @@
   left: calc(50% - 100px);
 }
 .authorA {
+  transform: scale(1.4);
 }
 body {
   display: flex;

@@ -8,7 +8,7 @@ class Metro {
     let _this = this;
     metro.className = "button1";
     metro.id = "metro";
-    metro.src = `images/speed${this.speed}.png`;
+    metro.src = `./images/metronome/speed${this.speed}.png`;
     metro.ontouchstart = e => {
       e.stopPropagation();
     };
@@ -25,7 +25,7 @@ class Metro {
     if (this.speed === 4) {
       this.speed = 1;
     }
-    let src = `images/speed${this.speed}.png`;
+    let src = `./images/metronome/speed${this.speed}.png`;
     metro.src = src;
     plane.speed = this.speed;
     console.log(this.speed);
