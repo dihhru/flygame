@@ -2,7 +2,7 @@ class Game {
   constructor() {
     this.scores = notesPositions.length;
     this.isStarted = false;
-    this.level = 1;
+    this.level = -1;
     this.notesPositions = null;
     this.activeNote = 0;
   }
