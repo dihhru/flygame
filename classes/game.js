@@ -55,9 +55,7 @@ class Game {
     this.isStarted = true;
     plane.speed = 0;
   }
-  test() {
-    return true;
-  }
+
   detectCollision(planeX, planeY, note, index) {
     if (Array.isArray(note)) {
       let posX = planeX >= note[0] - 100 && planeX <= note[0] + 50;
@@ -77,7 +75,11 @@ class Game {
       }
       let nota = document.getElementById(note[3]);
       let img = nota;
-      ctx.drawImage(img, note[0], note[1], 40, 75);
+      if (note[3] === 3) {
+        ctx.drawImage(img, note[0], note[1], 70, 120);
+      } else {
+        ctx.drawImage(img, note[0], note[1], 55, 85);
+      }
     });
   }
 }
