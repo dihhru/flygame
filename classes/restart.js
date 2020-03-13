@@ -8,7 +8,7 @@ class Restart {
     let _this = this;
     restart.className = "button1";
     restart.id = "restart";
-    restart.src = `images/restart.png`;
+    restart.src = `images/other/restart.png`;
     restart.ontouchstart = e => {
       e.stopPropagation();
     };
