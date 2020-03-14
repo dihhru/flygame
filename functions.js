@@ -57,7 +57,7 @@ function loadAudio(resolve) {
   }
 }
 function start() {
-  game.buildLevel();
+  game.buildLevel(0);
   plane.draw();
   document.getElementById("root").style.display = "flex";
   setTimeout(function() {

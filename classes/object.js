@@ -6,7 +6,6 @@ class Object {
   create(func = this.func) {
     let root = document.getElementById("tools");
     let object = document.createElement("img");
-    let _this = this;
     object.className = "object";
     object.id = this.name;
     object.src = `images/other/${this.name}.png`;

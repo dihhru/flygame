@@ -1,22 +1,21 @@
 class Game {
-  constructor() {
+  constructor(level) {
     this.scores = notesPositions.length;
     this.isStarted = false;
-    this.level = -1;
+    this.level = level;
     this.notesPositions = null;
     this.activeNote = 0;
     this.restart = this.restart.bind(this);
   }
   restart() {
-    this.level--;
-    this.buildLevel();
+    this.buildLevel(this.level);
     plane.position.x = 0;
   }
   test() {
     return true;
   }
-  win() {
-    let img = document.getElementById(authors[game.level]);
+  win(level) {
+    let img = document.getElementById(authors[level]);
     let clone = img.cloneNode();
     let root = document.getElementById("root");
     clone.className = "author";
@@ -28,27 +27,21 @@ class Game {
       game.buildLevel();
     }, 3500);
   }
-  buildLevel() {
+  buildLevel(level) {
     game.notesPositions = null;
     game.activeNote = 0;
-    this.level++;
-    if (this.level == 4) {
-      this.level = 0;
-    }
-    game.notesPositions = JSON.parse(
-      JSON.stringify(notesPositions[game.level])
-    );
-    game.scores = notesPositions[game.level].length;
+    game.notesPositions = JSON.parse(JSON.stringify(notesPositions[level]));
+    game.scores = notesPositions[level].length;
     let root = document.getElementById("root");
     let pannel = document.getElementById("pannel");
     root.removeChild(pannel);
-    let oldPannel = document.getElementById(`${authors[game.level]}_pannel`);
+    let oldPannel = document.getElementById(`${authors[level]}_pannel`);
     let newPannel = oldPannel.cloneNode();
     newPannel.id = "pannel";
     newPannel.className = "pannel";
     newPannel.onload = () => {
       document.getElementById("loading").style.display = "none";
-      game.isStarted = true;
+      this.isStarted = true;
     };
     root.appendChild(newPannel);
   }

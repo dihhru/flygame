@@ -29,7 +29,6 @@ class TouchScreen {
         let touchY = event.targetTouches[0].clientY;
         let middle = height / 2;
         touchY >= middle ? plane.moveY("-") : plane.moveY("+");
-        console.log(event);
         game.isStarted = true;
       },
       false
