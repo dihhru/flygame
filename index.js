@@ -6,12 +6,13 @@ let loading = document.getElementById("loading");
 
 let plane = new Plane();
 let notes = new Notes(notesPositions);
-let game = new Game(plane, notes);
-let input = new InputHandler(plane, game);
-let touch = new TouchScreen(plane, game);
+let pannel = new Pannel(plane, notes);
+let input = new InputHandler(plane, pannel);
+let touch = new TouchScreen(plane, pannel);
 let metro = new Object("metro", plane.setSpeed);
-let restart = new Object("restart", game.restart);
-notes.newLvl(0);
+let restart = new Object("restart", pannel.restart);
+let controller = new Controller(pannel, plane, notes);
+controller.startLvl();
 restart.create();
 metro.create();
 let promise = new Promise(function(resolve) {

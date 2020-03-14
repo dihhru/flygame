@@ -3,9 +3,9 @@ class Pannel {
     this.level = level;
     this.isLoaded = false;
   }
-  win(level) {
+  win() {
     let _this = this;
-    let img = document.getElementById(authors[level]);
+    let img = document.getElementById(authors[this.level]);
     let clone = img.cloneNode();
     let root = document.getElementById("root");
     clone.className = "author";
@@ -13,8 +13,8 @@ class Pannel {
     setTimeout(() => clone.classList.add("authorA"), 200);
     setTimeout(() => {
       root.removeChild(clone);
-      _this.setPannel(level);
-      _this.notes.newLevel(level);
+      _this.setPannel(this.level);
+      _this.notes.newLevel(this.level);
     }, 3500);
   }
   setPannel(level = 0) {
@@ -34,7 +34,7 @@ class Pannel {
     };
     root.appendChild(newPannel);
   }
-  draw(x = 0) {
+  draw(x) {
     let pannel = document.getElementById("pannel");
     ctx.drawImage(pannel, 0, -160, 3600, 860);
     ctx.setTransform(1, 0, 0, 1, 0, 0); //reset the transform matrix as it is cumulative

@@ -5,40 +5,43 @@ class Notes {
     this.scores = notesPositions.length;
     this.notesPositions = null;
   }
-  check(planeX, planeY) {
-    let _this = this;
-    planeX = planeX + 50;
-    this.notesPositions.map((note, index) => {
-      if (_this.notesPositions[index][2] === 0) {
-        return;
-      }
-      let n = _this.detectCollision(planeX, planeY, note, index);
-      if (n) {
-        let sound = sounds[this.level][index];
-        let id = uniq.indexOf(sound);
-        document.getElementById("s" + _this.activeNote).pause();
-        document.getElementById("s" + _this.activeNote).currentTime = 0;
-        document.getElementById("s" + id).play();
-        _this.notesPositions[index][2] = 0;
-        _this.scores--;
-        _this.activeNote = id;
-      }
-    });
+  // check(planeX, planeY) {
+  //   let _this = this;
+  //   planeX = planeX + 50;
+  //   this.notesPositions.map((note, index) => {
+  //     if (_this.notesPositions[index][2] === 0) {
+  //       return;
+  //     }
+  //     let n = _this.detectCollision(planeX, planeY, note, index);
+  //     if (n) {
+  //       let sound = sounds[this.level][index];
+  //       let id = uniq.indexOf(sound);
+  //       document.getElementById("s" + _this.activeNote).pause();
+  //       document.getElementById("s" + _this.activeNote).currentTime = 0;
+  //       document.getElementById("s" + id).play();
+  //       _this.notesPositions[index][2] = 0;
+  //       _this.scores--;
+  //       _this.activeNote = id;
+  //     }
+  //   });
 
-    // let last = [...this.notesPositions].pop();
-    //  if (this.position.x > last[0]) {
-    //   this.position.x = 0;
-    //  if (this.scores < 3) {
-    //    this.isStarted = false;
-    //    this.win();
-    //  } else {
-    //   this.restart();
-    //  }
-    //  }
+  // let last = [...this.notesPositions].pop();
+  //  if (this.position.x > last[0]) {
+  //   this.position.x = 0;
+  //  if (this.scores < 3) {
+  //    this.isStarted = false;
+  //    this.win();
+  //  } else {
+  //   this.restart();
+  //  }
+  //  }
+
+  border() {
+    return 1000;
   }
-  drawNotes() {
+  drawNotes(notes) {
     let _this = this;
-    this.notesPositions.map(function(note) {
+    notes.map(function(note) {
       if (note[2] === 0) {
         return;
       }
