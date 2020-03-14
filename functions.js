@@ -58,18 +58,14 @@ function loadAudio(resolve) {
 }
 function start() {
   game.buildLevel(0);
-  plane.draw();
   document.getElementById("root").style.display = "flex";
-  setTimeout(function() {
-    plane.draw();
-  }, 1000);
 }
 let lastTime = 0;
 function gameLoop(timestamp) {
   setTimeout(function() {
     let deltaTime = timestamp - lastTime;
     lastTime = timestamp;
-    plane.update(deltaTime);
+    game.update();
     requestAnimationFrame(gameLoop);
   }, 10);
 }
