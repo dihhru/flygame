@@ -1,11 +1,15 @@
 class Plane {
-  constructor(speed) {
+  constructor(speed = 1) {
     this.image = "images/plane.png";
     this.speed = speed;
     this.size = 100;
     this.distance = 0;
     this.setSpeed = this.setSpeed.bind(this);
     this.y = 150;
+  }
+  draw(x, y) {
+    plane = document.getElementById("plane");
+    ctx.drawImage(plane, x, y, 100, 100);
   }
   moveY(y) {
     let position = this.y;

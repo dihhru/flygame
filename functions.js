@@ -57,13 +57,12 @@ function loadAudio(resolve) {
   }
 }
 function start() {
-  game.buildLevel(0);
+  game.setPannel(0);
   document.getElementById("root").style.display = "flex";
 }
 let lastTime = 0;
 function gameLoop(timestamp) {
   setTimeout(function() {
-    let deltaTime = timestamp - lastTime;
     lastTime = timestamp;
     game.update();
     requestAnimationFrame(gameLoop);
