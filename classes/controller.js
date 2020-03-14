@@ -1,5 +1,6 @@
 class Controller {
   constructor(pannel, plane, notes) {
+    this.pannel = pannel;
     this.plane = plane;
     this.notes = notes;
     this.isStarted = false;
@@ -9,6 +10,17 @@ class Controller {
     this.size = 100;
     this.distance = 0;
     this.restart = this.restart.bind(this);
+  }
+  newLvl(level) {
+    this.level = level;
+    this.activeNote = 0;
+    this.notesPositions = JSON.parse(JSON.stringify(notesPositions[level]));
+    this.scores = notesPositions[level].length;
+    this.border(this.notesPositions);
+  }
+  border(arr = this.notesPositions) {
+    let last = [...arr].pop().slice(0, 1);
+    return last;
   }
   restart() {
     this.setPannel();

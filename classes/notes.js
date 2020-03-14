@@ -5,17 +5,6 @@ class Notes {
     this.scores = notesPositions.length;
     this.notesPositions = null;
   }
-  newLvl(level) {
-    this.level = level;
-    this.activeNote = 0;
-    this.notesPositions = JSON.parse(JSON.stringify(notesPositions[level]));
-    this.scores = notesPositions[level].length;
-    this.border(this.notesPositions);
-  }
-  border(arr = this.notesPositions) {
-    let last = [...arr].pop().slice(0, 1);
-    return last;
-  }
   check(planeX, planeY) {
     let _this = this;
     planeX = planeX + 50;

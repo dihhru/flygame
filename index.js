@@ -2,6 +2,7 @@ sreenSize();
 
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
+let loading = document.getElementById("loading");
 
 let plane = new Plane();
 let notes = new Notes(notesPositions);
