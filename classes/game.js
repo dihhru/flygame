@@ -5,6 +5,7 @@ class Game {
     this.level = -1;
     this.notesPositions = null;
     this.activeNote = 0;
+    this.restart = this.restart.bind(this);
   }
   restart() {
     this.level--;

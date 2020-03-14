@@ -92,7 +92,7 @@
 body {
   display: flex;
 }
-.button1 {
+.object {
   width: 5%;
   transition: 0s;
 }
