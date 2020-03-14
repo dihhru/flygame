@@ -71,5 +71,5 @@ function gameLoop(timestamp) {
     lastTime = timestamp;
     plane.update(deltaTime);
     requestAnimationFrame(gameLoop);
-  }, 0);
+  }, 10);
 }

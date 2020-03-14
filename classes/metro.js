@@ -8,7 +8,6 @@ class Metro {
     let _this = this;
     metro.className = "button1";
     metro.id = "metro";
-    metro.src = `./images/metronome/speed${this.speed}.png`;
     metro.ontouchstart = e => {
       e.stopPropagation();
     };

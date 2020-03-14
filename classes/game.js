@@ -11,6 +11,9 @@ class Game {
     this.buildLevel();
     plane.position.x = 0;
   }
+  test() {
+    return true;
+  }
   win() {
     let img = document.getElementById(authors[game.level]);
     let clone = img.cloneNode();
@@ -40,10 +43,7 @@ class Game {
     root.removeChild(pannel);
     let oldPannel = document.getElementById(`${authors[game.level]}_pannel`);
     let newPannel = oldPannel.cloneNode();
-    newPannel.onload = () => console.log(1);
     newPannel.id = "pannel";
-    newPannel.style.display = "none";
-    newPannel.style.width = "3600px";
     newPannel.className = "pannel";
     newPannel.onload = () => {
       document.getElementById("loading").style.display = "none";
@@ -55,31 +55,34 @@ class Game {
     this.isStarted = true;
     plane.speed = 0;
   }
-
-  detectCollision(planeX, planeY, note, index) {
+  detectCollision(planeX, planeY, note) {
     if (Array.isArray(note)) {
       let posX = planeX >= note[0] - 100 && planeX <= note[0] + 50;
       let posY = planeY >= note[1] - 75 && planeY <= note[1] + 75;
-      if (posX && posY) {
-        return true;
-      }
+      let value;
+      posX && posY ? (value = true) : (value = false);
+      return value;
     }
     return false;
   }
-  drawNotes() {
+  draw(note) {
     var canvas = document.getElementById("canvas");
     var ctx = canvas.getContext("2d");
+    let nota = document.getElementById(note[3]);
+    let img = nota;
+    if (note[3] === 3) {
+      ctx.drawImage(img, note[0], note[1], 70, 120);
+    } else {
+      ctx.drawImage(img, note[0], note[1], 55, 85);
+    }
+  }
+  drawNotes() {
+    let _this = this;
     game.notesPositions.map(function(note) {
       if (note[2] === 0) {
         return;
       }
-      let nota = document.getElementById(note[3]);
-      let img = nota;
-      if (note[3] === 3) {
-        ctx.drawImage(img, note[0], note[1], 70, 120);
-      } else {
-        ctx.drawImage(img, note[0], note[1], 55, 85);
-      }
+      _this.draw(note);
     });
   }
 }

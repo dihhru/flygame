@@ -64,6 +64,7 @@
   width: 3000px;
   overflow: hidden;
   height: 378px;
+  display: none;
 }
 .bar {
   width: 100%;
