@@ -3,8 +3,9 @@ class Pannel {
     this.level = level;
     this.isLoaded = false;
   }
-  win() {
+  win(level) {
     let _this = this;
+    this.level = level;
     let img = document.getElementById(authors[this.level]);
     let clone = img.cloneNode();
     let root = document.getElementById("root");
@@ -13,8 +14,7 @@ class Pannel {
     setTimeout(() => clone.classList.add("authorA"), 200);
     setTimeout(() => {
       root.removeChild(clone);
-      _this.setPannel(this.level);
-      _this.notes.newLevel(this.level);
+      _this.setPannel(_this.level);
     }, 3500);
   }
   setPannel(level = 0) {

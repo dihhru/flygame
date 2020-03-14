@@ -36,9 +36,6 @@ class Notes {
   //  }
   //  }
 
-  border() {
-    return 1000;
-  }
   drawNotes(notes) {
     let _this = this;
     notes.map(function(note) {

@@ -12,7 +12,7 @@ let touch = new TouchScreen(plane, pannel);
 let metro = new Object("metro", plane.setSpeed);
 let restart = new Object("restart", pannel.restart);
 let controller = new Controller(pannel, plane, notes);
-controller.startLvl();
+controller.startLvl(0);
 restart.create();
 metro.create();
 let promise = new Promise(function(resolve) {

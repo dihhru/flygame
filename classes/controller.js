@@ -5,27 +5,41 @@ class Controller {
     this.plane = plane;
     this.notes = notes;
     this.isStarted = true;
-    this.level = 0;
+    this.level = null;
     this.position = { x: 0, y: 300 };
     this.restart = this.restart.bind(this);
+    this.border = null;
   }
-  startLvl() {
-    let { pannel, allNotesPositions, level } = this;
+  startLvl(lvl = 0) {
+    this.position.x = 0;
+    let { pannel, allNotesPositions } = this;
+    this.level = lvl;
     this.activeNote = 0;
-    this.notesPositions = JSON.parse(JSON.stringify(allNotesPositions[level]));
-    this.scores = notesPositions[level].length;
+    this.notesPositions = JSON.parse(
+      JSON.stringify(allNotesPositions[this.level])
+    );
+    this.scores = this.notesPositions[this.level].length;
+    this.border = [...this.notesPositions].pop().slice(0, 1);
+    console.log(this.border);
     pannel.setPannel(this.level);
   }
-  newLvl(level) {
-    this.level = level;
-    this.activeNote = 0;
-    this.notesPositions = JSON.parse(JSON.stringify(notesPositions[level]));
-    this.scores = notesPositions[level].length;
-    this.border(this.notesPositions);
+  move() {
+    this.position.x += 2 * this.plane.speed;
+    this.position.y = this.plane.updateY();
   }
-  border(arr = this.notesPositions) {
-    let last = [...arr].pop().slice(0, 1);
-    return last;
+  update() {
+    this.move();
+    let { plane, notes, notesPositions } = this;
+    let { x, y } = this.position;
+    if (x > this.border) {
+      this.level++;
+      this.startLvl(this.level);
+    }
+    pannel.draw(x);
+    plane.draw(x, y);
+    notes.drawNotes(notesPositions);
+    notes.detectCollision(x, y);
+    //notes.check(x, y);
   }
   restart() {
     this.setPannel();
@@ -34,34 +48,5 @@ class Controller {
   togglePause() {
     this.isStarted = true;
     plane.speed = 0;
-  }
-  move() {
-    this.position.x += 2 * this.plane.speed;
-    this.position.y = this.plane.updateY();
-  }
-  update(level = 0) {
-    if (!this.isStarted) {
-      return;
-    }
-    this.move();
-    let { plane, notes, notesPositions } = this;
-    let { x, y } = this.position;
-    console.log(x);
-    let border = notes.border();
-    if (x > border) {
-      this.isStarted = false;
-      this.level++;
-      this.win(this.level);
-    }
-    pannel.draw(x);
-    plane.draw(x, y);
-    notes.drawNotes(notesPositions);
-    //notes.check(x, y);
-  }
-  setPosition() {
-    return null;
-  }
-  pause() {
-    return null;
   }
 }
