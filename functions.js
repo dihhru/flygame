@@ -49,37 +49,38 @@ function throttle(func, ms) {
   }
   return wrapper;
 }
-
+let sum = 0;
 function loadAudio(resolve) {
   let res = resolve;
   let bg = document.getElementById("cords");
-  let counter = [];
   let length = uniq.length;
   let i = 0;
   let progress = document.getElementById("progressBar");
   let index = i;
   let sound = uniq[i];
-  let doc = document.createElement("audio");
+
   let timer;
-  let sum;
   while (i < length) {
-    counter[i] = 0;
-    sum = 0;
+    let doc = document.createElement("audio");
     doc.preload = "auto";
     doc.src = `sounds/${sound}.wav`;
     doc.id = "s" + index;
     doc.muted = true;
-    doc.onloadeddata = () => sum++;
+    doc.onloadeddata = function() {
+      console.log("loaded");
+      sum++;
+      console.log(sum);
+    };
     bg.appendChild(doc);
+    i++;
   }
   timer = setInterval(() => {
     progress.style.width = (100 / length) * sum + "%";
     if (sum === length) {
+      clearInterval(timer);
+      console.log("loaded audio");
       res();
     }
-    console.log("loaded audio");
-    clearInterval(timer);
-    return i++;
   }, 500);
 }
 let game1 = throttle(gameLoop, 10);
