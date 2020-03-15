@@ -66,6 +66,7 @@ function loadAudio(resolve) {
     doc.src = `sounds/${sound}.wav`;
     doc.id = "s" + index;
     doc.muted = true;
+    doc.onloadeddata = () => console.log(index);
     bg.appendChild(doc);
     let timer;
     i = timer = setInterval(() => {

@@ -29,7 +29,6 @@ class Notes extends Object {
     doc.play();
   }
   check(x, y) {
-    console.log(this.notesPositions);
     let needle = x;
     let arr = this.notesPositions.filter(el => el[2] !== 0);
     if (!arr.length) {
