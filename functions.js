@@ -82,11 +82,12 @@ function loadAudio(resolve) {
       }
     }, 500);
   }
+  console.log("loaded audio");
 }
 let game1 = throttle(gameLoop, 10);
 function start() {
   pannel.setPannel(0);
-  document.getElementById("root").style.display = "flex";
+  document.getElementById("root").style.display = "";
   game1();
 }
 let lastTime = 0;
