@@ -8,8 +8,6 @@ class Controller {
     this.level = null;
     this.position = { x: null, y: null };
     this.border = null;
-    this.activeNote = null;
-    this.scores = null;
     this.startLvl = this.startLvl.bind(this);
   }
   win(level) {
@@ -32,12 +30,13 @@ class Controller {
   }
   startLvl(level = 0) {
     this.level = level;
+    this.notes.level = level;
     this.plane.x = 0;
     let { pannel, allNotesPositions } = this;
-    this.activeNote = 0;
-    this.notesPositions = JSON.parse(JSON.stringify(allNotesPositions[level]));
-    this.scores = this.notesPositions.length;
-    this.border = [...this.notesPositions].pop().slice(0, 1);
+    let arr = JSON.parse(JSON.stringify(allNotesPositions[level]));
+    this.border = [...arr].pop().slice(0, 1);
+    this.notes.content(this.level, arr, arr.length);
+    console.log(this.notes);
     pannel.setPannel(level);
     this.isStarted = true;
   }
@@ -46,36 +45,21 @@ class Controller {
       return;
     }
     this.position = this.plane.update();
-    let { plane, notes, notesPositions, level } = this;
+    let { plane, notes, level } = this;
     let { x, y } = this.position;
     if (x > this.border) {
       this.scores <= 3 ? this.win(this.level) : this.startLvl(this.level);
     }
     pannel.draw("pannel", 0, -160, 3600, 860);
-    plane.draw("plane", x, y, 100, 100);
-    ctx.setTransform(1, 0, 0, 1, 0, 0); //reset the transform matrix as it is cumulative
-    ctx.translate(-x, 0);
-    let needle = x;
-    let arr = this.notesPositions.filter(el => el[2] !== 0);
-    if (!arr.length) {
-      return;
-    }
-    let closest = arr.reduce((a, b) => {
-      return Math.abs(b[0] - needle) < Math.abs(a[0] - needle) ? b : a;
-    });
-    notes.drawNotes(notesPositions);
-    let val = notes.detectCollision(x, y, closest);
-    if (val) {
-      if (!!this.activeNote) {
-        document.getElementById(this.activeNote).pause();
-        document.getElementById(this.activeNote).muted = true;
-        document.getElementById(this.activeNote).currentTime = 0;
-      }
 
-      notes.play(notesPositions, level, closest);
-      this.notesPositions[index][2] = 0;
-      this.scores--;
-      this.activeNote = "s" + id;
-    }
+    plane.draw("plane", x, y, 100, 100);
+
+    notes.drawNotes();
+
+    notes.check(x, y);
+
+    ctx.setTransform(1, 0, 0, 1, 0, 0); //reset the transform matrix as it is cumulative
+
+    ctx.translate(-x, 0);
   }
 }
