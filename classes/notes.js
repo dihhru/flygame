@@ -1,61 +1,29 @@
-class Notes {
+class Notes extends Object {
   constructor(notesPositions) {
+    super();
     this.level = null;
-    this.allNotesPositions = notesPositions;
     this.scores = notesPositions.length;
-    this.notesPositions = null;
+    this.scores--;
+    this.activeNote = "s" + id;
   }
-  // check(planeX, planeY) {
-  //   let _this = this;
-  //   planeX = planeX + 50;
-  //   this.notesPositions.map((note, index) => {
-  //     if (_this.notesPositions[index][2] === 0) {
-  //       return;
-  //     }
-  //     let n = _this.detectCollision(planeX, planeY, note, index);
-  //     if (n) {
-  //       let sound = sounds[this.level][index];
-  //       let id = uniq.indexOf(sound);
-  //       document.getElementById("s" + _this.activeNote).pause();
-  //       document.getElementById("s" + _this.activeNote).currentTime = 0;
-  //       document.getElementById("s" + id).play();
-  //       _this.notesPositions[index][2] = 0;
-  //       _this.scores--;
-  //       _this.activeNote = id;
-  //     }
-  //   });
-
-  // let last = [...this.notesPositions].pop();
-  //  if (this.position.x > last[0]) {
-  //   this.position.x = 0;
-  //  if (this.scores < 3) {
-  //    this.isStarted = false;
-  //    this.win();
-  //  } else {
-  //   this.restart();
-  //  }
-  //  }
-
+  play(notesPositions, level, note) {
+    console.log(arguments);
+    let index = notesPositions.indexOf(note);
+    let sound = sounds[level][index];
+    let id = uniq.indexOf(sound);
+    let doc = document.getElementById("s" + id);
+    doc.muted = false;
+    doc.play();
+  }
   drawNotes(notes) {
     let _this = this;
     notes.map(function(note) {
       if (note[2] === 0) {
         return;
       }
-      _this.draw(note);
+      let img = note[3];
+      _this.draw(img, note[0], note[1], 70, 120);
     });
-  }
-  draw(note) {
-    let nota = document.getElementById(note[3]);
-    if (nota === null) {
-      return;
-    }
-    let img = nota;
-    if (note[3] === 3) {
-      ctx.drawImage(img, note[0], note[1], 70, 120);
-    } else {
-      ctx.drawImage(img, note[0], note[1], 55, 85);
-    }
   }
   detectCollision(planeX, planeY, note, index) {
     if (Array.isArray(note)) {

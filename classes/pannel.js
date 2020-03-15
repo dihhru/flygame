@@ -1,21 +1,8 @@
-class Pannel {
+class Pannel extends Object {
   constructor(level = 0) {
+    super();
     this.level = level;
     this.isLoaded = false;
-  }
-  win(level) {
-    let _this = this;
-    this.level = level;
-    let img = document.getElementById(authors[this.level]);
-    let clone = img.cloneNode();
-    let root = document.getElementById("root");
-    clone.className = "author";
-    root.appendChild(clone);
-    setTimeout(() => clone.classList.add("authorA"), 200);
-    setTimeout(() => {
-      root.removeChild(clone);
-      _this.setPannel(_this.level);
-    }, 3500);
   }
   setPannel(level = 0) {
     let _this = this;
@@ -33,11 +20,5 @@ class Pannel {
       _this.isLoaded = true;
     };
     root.appendChild(newPannel);
-  }
-  draw(x) {
-    let pannel = document.getElementById("pannel");
-    ctx.drawImage(pannel, 0, -160, 3600, 860);
-    ctx.setTransform(1, 0, 0, 1, 0, 0); //reset the transform matrix as it is cumulative
-    ctx.translate(-x, 0);
   }
 }

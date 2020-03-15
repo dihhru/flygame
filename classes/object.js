@@ -15,4 +15,8 @@ class Object {
     object.onclick = func;
     root.appendChild(object);
   }
+  draw(img, x, y, width, height) {
+    img = document.getElementById(img);
+    ctx.drawImage(img, x, y, width, height);
+  }
 }

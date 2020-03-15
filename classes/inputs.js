@@ -1,5 +1,5 @@
 class InputHandler {
-  constructor(plane, game) {
+  constructor(plane, controller) {
     document.addEventListener("keydown", event => {
       switch (event.keyCode) {
         case 38:
@@ -9,10 +9,12 @@ class InputHandler {
           plane.moveY("-");
           break;
         case 32:
-          controller.togglePause();
+          controller.isStarted = !this.isStarted;
           break;
         case 13:
-          controller.togglePause();
+          controller.isStarted = !this.isStarted;
+          break;
+        default:
           break;
       }
     });

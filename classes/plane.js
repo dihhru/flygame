@@ -1,28 +1,27 @@
-class Plane {
+class Plane extends Object {
   constructor(speed = 1) {
+    super();
     this.image = "images/plane.png";
     this.speed = speed;
     this.size = 100;
     this.distance = 0;
     this.setSpeed = this.setSpeed.bind(this);
     this.y = 150;
-  }
-  draw(x, y) {
-    plane = document.getElementById("plane");
-    ctx.drawImage(plane, x, y, 100, 100);
+    this.x = 0;
   }
   moveY(y) {
     let position = this.y;
     y === "-" ? (position += 15) : (position -= 15);
     return (this.y = position);
   }
-  updateY() {
+  update() {
+    this.x += 2 * this.speed;
     this.y += 0.2;
     if (this.y < 0 || this.y > 600) {
       this.crash();
       this.y = 300;
     }
-    return this.y;
+    return { y: this.y, x: this.x };
   }
   crash() {
     let audio = document.createElement("audio");

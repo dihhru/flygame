@@ -1,29 +1,56 @@
 function sreenSize() {
-  let root = document.getElementById("root");
-  let canvas = document.getElementById("canvas");
-  let loading = document.getElementById("loading");
-  let width = document.documentElement.clientWidth;
-  let height = document.documentElement.clientHeight;
-  let n;
+  let width, height, n;
+
+  width = document.documentElement.clientWidth;
+  height = document.documentElement.clientHeight;
   n = 2.2;
+
   if (width < height) {
-    height = height / 2;
+    height /= 2;
     n = 2;
   }
   loading.style.width = width + "px";
   loading.style.height = height + "px";
+
   root.style.width = width + "px";
-  canvas.style.width = width + "px";
   root.style.height = height + "px";
+
+  canvas.style.width = width + "px";
   canvas.style.height = height + "px";
+
   for (let i = 0; i < notesPositions.length; i++) {
     notesPositions[i] = notesPositions[i].map(function(x) {
-      x[0] = x[0] * n;
-      x[1] = x[1] * 2;
+      x[0] *= n;
+      x[1] *= 2;
       return x;
     });
   }
 }
+function throttle(func, ms) {
+  let isThrottled = false,
+    savedArgs,
+    savedThis;
+  function wrapper() {
+    if (isThrottled) {
+      // (2)
+      savedArgs = arguments;
+      savedThis = this;
+      return;
+    }
+    func.apply(this, arguments); // (1)
+    isThrottled = true;
+    setTimeout(function() {
+      isThrottled = false; // (3)
+      if (savedArgs) {
+        wrapper.apply(savedThis, savedArgs);
+        savedArgs = savedThis = null;
+      }
+    }, ms);
+  }
+
+  return wrapper;
+}
+
 function loadAudio(resolve) {
   let res = resolve;
   let bg = document.getElementById("cords");
@@ -39,6 +66,7 @@ function loadAudio(resolve) {
     doc.preload = "auto";
     doc.src = `sounds/${sound}.wav`;
     doc.id = "s" + index;
+    doc.muted = true;
     bg.appendChild(doc);
     let timer;
     i = timer = setInterval(() => {
@@ -56,15 +84,15 @@ function loadAudio(resolve) {
     }, 500);
   }
 }
+let game1 = throttle(gameLoop, 10);
 function start() {
   pannel.setPannel(0);
   document.getElementById("root").style.display = "flex";
+  game1();
 }
 let lastTime = 0;
-function gameLoop(timestamp) {
-  setTimeout(function() {
-    lastTime = timestamp;
-    controller.update();
-    requestAnimationFrame(gameLoop);
-  }, 10);
+
+function gameLoop() {
+  controller.update();
+  requestAnimationFrame(gameLoop);
 }
