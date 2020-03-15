@@ -57,33 +57,30 @@ function loadAudio(resolve) {
   let length = uniq.length;
   let i = 0;
   let progress = document.getElementById("progressBar");
+  let index = i;
+  let sound = uniq[i];
+  let doc = document.createElement("audio");
+  let timer;
+  let sum;
   while (i < length) {
     counter[i] = 0;
-    let index = i;
-    let sound = uniq[i];
-    let doc = document.createElement("audio");
+    sum = 0;
     doc.preload = "auto";
     doc.src = `sounds/${sound}.wav`;
     doc.id = "s" + index;
     doc.muted = true;
-    doc.onloadeddata = () => console.log(index);
+    doc.onloadeddata = () => sum++;
     bg.appendChild(doc);
-    let timer;
-    i = timer = setInterval(() => {
-      let song = document.getElementById("s" + index);
-      if (song.readyState === 4) {
-        counter[index] = 1;
-        let sum = counter.reduce((a, b) => a + b);
-        progress.style.width = (100 / length) * sum + "%";
-        if (sum === length) {
-          res();
-        }
-        clearInterval(timer);
-        return i++;
-      }
-    }, 500);
   }
-  console.log("loaded audio");
+  timer = setInterval(() => {
+    progress.style.width = (100 / length) * sum + "%";
+    if (sum === length) {
+      res();
+    }
+    console.log("loaded audio");
+    clearInterval(timer);
+    return i++;
+  }, 500);
 }
 let game1 = throttle(gameLoop, 10);
 function start() {
