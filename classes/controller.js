@@ -20,7 +20,6 @@ class Controller {
     );
     this.scores = this.notesPositions[this.level].length;
     this.border = [...this.notesPositions].pop().slice(0, 1);
-    console.log(this.border);
     pannel.setPannel(this.level);
   }
   move() {
@@ -28,6 +27,9 @@ class Controller {
     this.position.y = this.plane.updateY();
   }
   update() {
+    if (!this.isStarted) {
+      return;
+    }
     this.move();
     let { plane, notes, notesPositions } = this;
     let { x, y } = this.position;
@@ -35,18 +37,39 @@ class Controller {
       this.level++;
       this.startLvl(this.level);
     }
+
     pannel.draw(x);
     plane.draw(x, y);
+    let needle = x;
+    let closest = this.notesPositions.reduce((a, b) => {
+      return Math.abs(b[0] - needle) < Math.abs(a[0] - needle) ? b : a;
+    });
     notes.drawNotes(notesPositions);
-    notes.detectCollision(x, y);
+    let val = notes.detectCollision(x, y, closest);
+    if (val) {
+      console.log(val);
+      this.play(closest);
+    }
     //notes.check(x, y);
+  }
+  play(note) {
+    console.log(note);
+    let index = this.notesPositions.indexOf(note);
+    let sound = sounds[this.level][index];
+    let id = uniq.indexOf(sound);
+    console.log(id);
+    // document.getElementById("s" + _this.activeNote).pause();
+    //   document.getElementById("s" + _this.activeNote).currentTime = 0;
+    //   document.getElementById("s" + id).play();
+    //   _this.notesPositions[index][2] = 0;
+    // _this.scores--;
+    //    _this.activeNote = id;
   }
   restart() {
     this.setPannel();
     plane.position.x = 0;
   }
   togglePause() {
-    this.isStarted = true;
-    plane.speed = 0;
+    this.isStarted = !this.isStarted;
   }
 }

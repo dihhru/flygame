@@ -9,12 +9,10 @@ class InputHandler {
           plane.moveY("-");
           break;
         case 32:
-          var value = game.isStarted;
-          game.isStarted = !value;
+          controller.togglePause();
           break;
         case 13:
-          var value = game.isStarted;
-          game.isStarted = !value;
+          controller.togglePause();
           break;
       }
     });
