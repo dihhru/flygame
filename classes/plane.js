@@ -5,6 +5,23 @@ class Plane {
     this.position = { x: 0, y: 300 };
     this.size = 100;
     this.distance = 0;
+<<<<<<< Updated upstream
+=======
+    this.y = 150;
+    this.x = 0;
+    this.setSpeed = this.setSpeed.bind(this);
+  }
+  setSpeed() {
+    let metro = document.getElementById("metro");
+    metro.onclick = () => this.setSpeed();
+    this.speed++;
+    if (this.speed === 4) {
+      this.speed = 1;
+    }
+    let src = `./images/metronome/speed${this.speed}.png`;
+    metro.src = src;
+    plane.speed = this.speed;
+>>>>>>> Stashed changes
   }
   moveY(x) {
     x === "-" ? (this.position.y += 15) : (this.position.y -= 15);
@@ -24,6 +41,7 @@ class Plane {
     audio.src = "sounds/crash_sound.wav";
     audio.play();
   }
+<<<<<<< Updated upstream
   draw() {
     var canvas = document.getElementById("canvas");
     var ctx = canvas.getContext("2d");
@@ -68,4 +86,6 @@ class Plane {
       }
     }
   }
+=======
+>>>>>>> Stashed changes
 }
