@@ -59,7 +59,7 @@ class Notes {
   }
   detectCollision(planeX, planeY, note, index) {
     if (Array.isArray(note)) {
-      let posX = planeX >= note[0] - 100 && planeX <= note[0] + 50;
+      let posX = planeX >= note[0] - 100 && planeX <= note[0] + 150;
       let posY = planeY >= note[1] - 75 && planeY <= note[1] + 75;
       let value;
       posX && posY ? (value = true) : (value = false);
