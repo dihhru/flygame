@@ -7,7 +7,7 @@ sreenSize();
 let plane = new Plane();
 let notes = new Notes(notesPositions);
 let pannel = new Pannel(plane, notes);
-let touch = new TouchScreen(plane, pannel);
+
 let controller = new Controller(pannel, plane, notes);
 let metro = new Object("metro", plane.setSpeed);
 let restart = new Object("restart", controller.startLvl);
