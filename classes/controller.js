@@ -4,7 +4,7 @@ class Controller {
     this.pannel = pannel;
     this.plane = plane;
     this.notes = notes;
-    this.isStarted = true;
+    this.isStarted = false;
     this.level = null;
     this.position = { x: null, y: null };
     this.border = null;
