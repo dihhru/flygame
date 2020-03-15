@@ -51,15 +51,10 @@ class Controller {
       this.scores <= 3 ? this.win(this.level) : this.startLvl(this.level);
     }
     pannel.draw("pannel", 0, -160, 3600, 860);
-
     plane.draw("plane", x, y, 100, 100);
-
     notes.drawNotes();
-
     notes.check(x, y);
-
     ctx.setTransform(1, 0, 0, 1, 0, 0); //reset the transform matrix as it is cumulative
-
     ctx.translate(-x, 0);
   }
 }
