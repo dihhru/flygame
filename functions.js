@@ -56,15 +56,13 @@ function loadAudio(resolve) {
   let length = uniq.length;
   let i = 0;
   let progress = document.getElementById("progressBar");
-  let index = i;
-  let sound = uniq[i];
-
   let timer;
   while (i < length) {
+    let sound = uniq[i];
     let doc = document.createElement("audio");
     doc.preload = "auto";
     doc.src = `sounds/${sound}.wav`;
-    doc.id = "s" + index;
+    doc.id = "s" + i;
     doc.muted = true;
     doc.onloadeddata = function() {
       console.log("loaded");
