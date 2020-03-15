@@ -3,7 +3,7 @@ const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 const loading = document.getElementById("loading");
 sreenSize();
-
+console.log("ready");
 let plane = new Plane();
 let notes = new Notes(notesPositions);
 let pannel = new Pannel(plane, notes);
