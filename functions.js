@@ -61,7 +61,7 @@ function loadAudio(resolve) {
     let sound = uniq[i];
     let doc = document.createElement("audio");
     doc.preload = "auto";
-    doc.muted = true;
+    doc.muted = true; //prevents "user didn't interact with the document first. err"
     doc.src = `sounds/${sound}.wav`;
     doc.id = "s" + i;
     doc.muted = true;
@@ -82,7 +82,7 @@ function loadAudio(resolve) {
     }
   }, 500);
 }
-let game1 = throttle(gameLoop, 10);
+let game1 = throttle(gameLoop, 20);
 function start() {
   pannel.setPannel(0);
   document.getElementById("root").style.display = "";

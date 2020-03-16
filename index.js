@@ -2,7 +2,14 @@ const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 const loading = document.getElementById("loading");
 sreenSize();
-console.log("read1");
+
+console.log("read2");
+let promise = new Promise(function(resolve) {
+  loadAudio(resolve);
+});
+promise.then(x => start());
+console.log("ready3");
+
 let plane = new Plane();
 let notes = new Notes(notesPositions);
 let pannel = new Pannel(plane, notes);
@@ -13,7 +20,3 @@ let input = new InputHandler(plane, controller);
 controller.startLvl(0);
 metro.create();
 restart.create();
-let promise = new Promise(function(resolve) {
-  loadAudio(resolve);
-});
-promise.then(x => start());
