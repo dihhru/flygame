@@ -56,11 +56,9 @@ function loadAudio(resolve) {
   let length = uniq.length;
   let i = 0;
   let progress = document.getElementById("progressBar");
-  let timer;
   while (i < length) {
     let sound = uniq[i];
     let doc = document.createElement("audio");
-
     doc.muted = true; //prevents "user didn't interact with the document first. err"
     doc.src = `sounds/${sound}.wav`;
     doc.id = "s" + i;
@@ -69,16 +67,16 @@ function loadAudio(resolve) {
       console.log("loaded");
       sum++;
       console.log(sum);
+      progress.style.width = (100 / length) * sum + "%";
     };
     bg.appendChild(doc);
     i++;
   }
-  timer = setInterval(() => {
-    progress.style.width = (100 / length) * sum + "%";
+  let timer = setInterval(() => {
     if (sum === length) {
-      clearInterval(timer);
       console.log("loaded audio");
       res();
+      clearInterval(timer);
     }
   }, 500);
 }
