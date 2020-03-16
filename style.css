@@ -107,3 +107,9 @@ body {
   left: 10px;
   z-index: 1000;
 }
+.root {
+  flex-direction: column;
+  position: relative;
+
+  justify-content: center;
+}
