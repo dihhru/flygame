@@ -27,7 +27,7 @@ class InputHandler {
         touchY >= middle ? plane.moveY("-") : plane.moveY("+");
         controller.isStarted = true;
       },
-      false
+      { passive: true }
     );
   }
 }
