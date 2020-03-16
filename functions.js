@@ -82,8 +82,9 @@ function loadAudio(resolve) {
     }
   }, 500);
 }
-let game1 = throttle(gameLoop, 20);
+let game1 = throttle(gameLoop, 200);
 function start() {
+  alert("start");
   pannel.setPannel(0);
   document.getElementById("root").style.display = "";
   game1();
