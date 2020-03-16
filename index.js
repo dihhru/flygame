@@ -2,13 +2,11 @@ const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 const loading = document.getElementById("loading");
 sreenSize();
-
-console.log("read2");
 let promise = new Promise(function(resolve) {
   loadAudio(resolve);
+  loadImages();
 });
 promise.then(x => start());
-console.log("ready3");
 
 let plane = new Plane();
 let notes = new Notes(notesPositions);

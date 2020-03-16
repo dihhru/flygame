@@ -11,10 +11,11 @@ class Controller {
     this.startLvl = this.startLvl.bind(this);
   }
   win(level) {
+    this.level++;
     this.isStarted = false;
     let _this, img, clone;
     _this = this;
-    img = document.getElementById(authors[level]);
+    img = document.getElementById(authors[this.level]);
     clone = img.cloneNode();
     clone.className = "author";
     root.appendChild(clone);
@@ -48,7 +49,7 @@ class Controller {
     let { plane, notes, level } = this;
     let { x, y } = this.position;
     if (x > this.border) {
-      this.scores <= 3 ? this.win(this.level) : this.startLvl(this.level);
+      this.notes.scores <= 3 ? this.win() : this.startLvl(this.level);
     }
     pannel.draw("pannel", 0, -160, 3600, 860);
     plane.draw("plane", x, y, 100, 100);

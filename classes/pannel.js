@@ -4,15 +4,14 @@ class Pannel extends Object {
     this.level = level;
     this.isLoaded = false;
   }
-  setPannel(level = 0) {
+  setPannel(level) {
     let _this = this;
     loading.style.display = "";
     let root = document.getElementById("root");
-    let pannel = document.getElementById("pannel");
-    root.removeChild(pannel);
     this.isLoaded = false;
-    let oldPannel = document.getElementById(`${authors[level]}_pannel`);
-    let newPannel = oldPannel.cloneNode();
+    let newPannel = document.getElementById("pannel");
+    let pannel = authors[level];
+    newPannel.src = `images/pannels/${pannel}_pannel.png`;
     newPannel.id = "pannel";
     newPannel.className = "pannel";
     newPannel.onload = () => {

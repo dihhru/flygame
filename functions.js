@@ -1,6 +1,5 @@
 function sreenSize() {
   let width, height, n;
-
   width = document.documentElement.clientWidth;
   height = document.documentElement.clientHeight;
   n = 2.2;
@@ -74,15 +73,14 @@ function loadAudio(resolve) {
   }
   let timer = setInterval(() => {
     if (sum === length) {
+      clearInterval(timer);
       console.log("loaded audio");
       res();
-      clearInterval(timer);
     }
   }, 500);
 }
 let game1 = throttle(gameLoop, 200);
 function start() {
-  alert("start");
   pannel.setPannel(0);
   document.getElementById("root").style.display = "";
   game1();
@@ -93,3 +91,29 @@ function gameLoop() {
   controller.update();
   requestAnimationFrame(gameLoop);
 }
+function loadImages() {
+  let bg = document.getElementById("res");
+  let length = authors.length;
+  let i = 0;
+  while (i < length) {
+    let author = authors[i];
+    let img = document.createElement("img");
+    img.id = author;
+    img.src = `images/authors/${author}.gif`;
+    img.width = "200";
+    img.height = "300";
+    bg.appendChild(img);
+    i++;
+  }
+
+  let i1 = 0;
+  while (i1 < 4) {
+    let img = document.createElement("img");
+    img.src = `images/notes/${i1}.png`;
+    img.width = "150";
+    img.id = i1;
+    bg.appendChild(img);
+    i1++;
+  }
+}
+//      <img id="2" src="images/notes/2.png" width="150" />
