@@ -1,5 +1,10 @@
-function loadImages(resolve) {
+function loadImages(resolve, reject) {
   let res = resolve;
+  let rej = reject;
+  let err = setTimeout(() => {
+    rej("errordog");
+  }, 3000);
+
   let bg = document.getElementById("res");
   let length = authors.length;
   let i = 0;
@@ -8,14 +13,15 @@ function loadImages(resolve) {
   authors();
   notes();
   let timer = setInterval(() => {
-    console.log(sum);
     if (sum >= allLength) {
       clearInterval(timer);
       console.log("loaded images");
-      res();
+      setTimeout(() => {
+        clearTimeout(err);
+        res("dog");
+      }, 2000);
     }
   });
-
   function authors() {
     while (i < length) {
       let author = authors[i];
@@ -43,7 +49,7 @@ function loadImages(resolve) {
   }
 }
 
-function loadAudio(resolve) {
+function loadAudio(resolve, reject) {
   let res = resolve;
   let bg = document.getElementById("cords");
   let length = uniq.length;
@@ -55,7 +61,7 @@ function loadAudio(resolve) {
     if (sum >= length) {
       clearInterval(timer);
       console.log("loaded audio");
-      res();
+      res("cat");
     }
   }, 500);
   function audios() {
