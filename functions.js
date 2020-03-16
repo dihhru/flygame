@@ -60,7 +60,7 @@ function loadAudio(resolve) {
   while (i < length) {
     let sound = uniq[i];
     let doc = document.createElement("audio");
-    doc.preload = "auto";
+
     doc.muted = true; //prevents "user didn't interact with the document first. err"
     doc.src = `sounds/${sound}.wav`;
     doc.id = "s" + i;
