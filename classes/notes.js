@@ -12,6 +12,7 @@ class Notes extends Object {
     this.scores = scores;
   }
   play(note) {
+    console.log(this.scores);
     let level = this.level;
     if (!!this.activeNote) {
       document.getElementById(this.activeNote).pause();

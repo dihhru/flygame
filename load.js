@@ -1,28 +1,20 @@
 function loadImages(resolve, reject) {
   let res = resolve;
-  let rej = reject;
-  let err = setTimeout(() => {
-    rej("errordog");
-  }, 3000);
-
   let bg = document.getElementById("res");
   let length = authors.length;
   let i = 0;
   let sum = 0;
   let allLength = length;
-  authors();
-  notes();
   let timer = setInterval(() => {
     if (sum >= allLength) {
       clearInterval(timer);
+      res();
       console.log("loaded images");
-      setTimeout(() => {
-        clearTimeout(err);
-        res("dog");
-      }, 2000);
     }
   });
-  function authors() {
+  loadauthors();
+  notes();
+  function loadauthors() {
     while (i < length) {
       let author = authors[i];
       let img = document.createElement("img");
@@ -61,7 +53,7 @@ function loadAudio(resolve, reject) {
     if (sum >= length) {
       clearInterval(timer);
       console.log("loaded audio");
-      res("cat");
+      res();
     }
   }, 500);
   function audios() {
