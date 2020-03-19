@@ -18,8 +18,10 @@ let prepare = async function() {
   controller.startLvl(0);
   metro.create();
   restart.create();
-  images = await imagesP;
   audio = await audioP;
+  images = await imagesP;
+
+  return images + audio;
 };
 prepare()
   .then(x => start())

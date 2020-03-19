@@ -2,27 +2,30 @@ function loadImages(resolve, reject) {
   let res = resolve;
   let bg = document.getElementById("res");
   let length = authors.length;
-  let i = 0;
+  let allLength = length + 4;
   let sum = 0;
-  let allLength = length;
+  loadauthors();
+  notes();
   let timer = setInterval(() => {
+    console.log(sum);
     if (sum >= allLength) {
       clearInterval(timer);
       res();
       console.log("loaded images");
     }
-  });
-  loadauthors();
-  notes();
+  }, 500);
   function loadauthors() {
+    let i = 0;
     while (i < length) {
       let author = authors[i];
       let img = document.createElement("img");
+      let src = `images/authors/${author}.gif`;
+      console.log(src);
       img.id = author;
-      img.src = `images/authors/${author}.gif`;
+      img.src = src;
       img.width = "200";
       img.height = "300";
-      img.onloadeddata = () => sum++;
+      img.onload = sum++;
       bg.appendChild(img);
       i++;
     }
@@ -34,7 +37,7 @@ function loadImages(resolve, reject) {
       img.src = `images/notes/${i1}.png`;
       img.width = "150";
       img.id = i1;
-      img.onloadeddata = () => sum++;
+      img.onload = () => sum++;
       bg.appendChild(img);
       i1++;
     }
@@ -65,9 +68,7 @@ function loadAudio(resolve, reject) {
       doc.id = "s" + i;
       doc.muted = true;
       doc.onloadeddata = function() {
-        console.log("loaded");
         sum++;
-        console.log(sum);
         progress.style.width = (100 / length) * sum + "%";
       };
       bg.appendChild(doc);
